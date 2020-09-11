@@ -81,6 +81,8 @@ PHARM scripts can detect hate speech in texts produced in Italian, Greek and Spa
 ### Approach
 A chained approach is adopted for improved robustness. textblob, google translate and langdetect services are exploited. If a service fails
 the result form the next one is requested.  
+### Implementation
+The aforementioned approach is implemented as a method (detect_language(text) -> language) in the analysis_nlp.py file.
 ### Packages Evaluated
 Package | Pros | Cons | Link
 --------|------|------|-----

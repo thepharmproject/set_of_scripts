@@ -77,31 +77,18 @@ Others
 	Most of them require an API with a paid subscription.
 
 # Language detection
-Detect language from text. A chained approach is adopted for improved robustness. textblob, google translate and langdetect services are exploited. If a service fails
+Detect language from text. 
+### Approach
+A chained approach is adopted for improved robustness. textblob, google translate and langdetect services are exploited. If a service fails
 the result form the next one is requested.  
 ### Packages Evaluated
-Package | Pros | Cons
---------|------|----
-textblob | Accurate, easy to use. | Limited requests.
-
-
-https://anaconda.org/conda-forge/textblob
-googletrans
-Pros: Seems accurate, easy to use.
-Cons: None (so far).
-https://anaconda.org/conda-forge/googletrans
-pycld2 (Chromium Compact Language Detector)
-Pros: Reports estimation reliability.
-Cons: Only for linux python envs.
-https://anaconda.org/syllabs_admin/pycld2
-langdetect (Compact Language Detection Kit)
-Pros: Seems accurate, easy to use.
-Cons: None (so far).
-https://anaconda.org/conda-forge/langdetect
-alchemyapi (Alchemy API)
-Pros: To be tested (maybe).
-Cons: No anaconda package, no longer supported by IBM.
-https://github.com/AlchemyAPI/alchemyapi_python
+Package | Pros | Cons | Link
+--------|------|------|-----
+textblob | Accurate and easy to use | Limited requests. | https://anaconda.org/conda-forge/textblob
+googletrans | Accurate and easy to use. | None (so far). | https://anaconda.org/conda-forge/googletrans
+pycld2 | Reports estimation reliability. | Only for linux python envs. | https://anaconda.org/syllabs_admin/pycld2
+langdetect | Seems accurate, easy to use. | None (so far). | https://anaconda.org/conda-forge/langdetect
+alchemyapi | - | No anaconda package, no longer supported by IBM. | https://github.com/AlchemyAPI/alchemyapi_python
 
 # Metadata selection
 Taking into account the requirements of the project (i.e. PHARM might use some rele-vant extra information for hate speech analysis), the sources that will be used for gath-ering the relevant content (i.e. Website articles and comments, YouTube comments and Twitter tweets), interoperability and compatibility considerations for import-ing/exporting data to third party applications that may/should be exploited (i.e. docca-no platform for annotation), the following general specifications have been set:

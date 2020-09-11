@@ -79,10 +79,12 @@ Others
 # Language detection
 Detect language from text. A chained approach is adopted for improved robustness. textblob, google translate and langdetect services are exploited. If a service fails
 the result form the next one is requested.  
-Packages Evaluated
-textblob
-Pros: Accurate, easy to use.
-Cons: Limited requests.
+### Packages Evaluated
+Package | Pros | Cons
+--------|------|----
+textblob | Accurate, easy to use. | Limited requests.
+
+
 https://anaconda.org/conda-forge/textblob
 googletrans
 Pros: Seems accurate, easy to use.

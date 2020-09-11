@@ -77,6 +77,8 @@ Others
 	Most of them require an API with a paid subscription.
 
 # Language detection
+Detect language from text. A chained approach is adopted for improved robustness.textblob, google translate and langdetect services are exploited. If a service fails
+the result form the next one is requested.
 Packages Evaluated
 textblob
 Pros: Accurate, easy to use.

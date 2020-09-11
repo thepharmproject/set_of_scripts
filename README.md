@@ -1,6 +1,5 @@
 # Set of scripts of lagorithms for the PHARM project
-
-5 logia gia to project
+Set of scripts of algorithms - The algorithm’s scripts will be made available in Github so they can be shared with the rest of the team, but also with external stakeholders. The URL of the scripts in Github will allow its evaluation by testing if all scripts can be run with the corresponding expected result (download of contents from different digital and social media, automated classification, etc.). 
 
 # Sources selection
 •	A spreadsheet in Google Docs (https://bit.ly/3jaWzEq) for adding sources of in-terest have been deployed. Each sheet refers to a country (i.e. International, Spanish, Greek, Italian).
@@ -9,11 +8,69 @@
 •	An additional column with feedback, denoting also the current site's gathering status is also specified. If an "OK" note is present, then the scraper is already ca-pable of gathering data for the specific site.
 •	As for the websites, much effort was put on scraping "difficult" websites (i.e., when JavaScript is used for article/comments loading). The implementation of a scraper has to be tuned for each website independently. This adaptive "scraping configuration" is generally a time-consuming process. Hence, if you want to add new entries to the online spreadsheet, precise/targeted additions are recom-mended. If comments are vital for our analysis, consider leaving out websites without/or will rare commenting. If a website is more probable to contain hate speech content, give it a higher priority than others.
 Progress
-•	The list is a preliminary attempt to review the most important/popular sources for each region/language, so as to examine/evaluate the technical needs/difficulties for developing data scraping algorithms for each individual website/platform. It is probable that some entries will not be includ-ed/implemented, so consider adding the most representa-tive/popular/interesting sources at this step. 
+•	The list is a preliminary attempt to review the most important/popular sources for each region/language, so as to examine/evaluate the technical needs/difficulties for developing data scraping algorithms for each individual website/platform. It is probable that some entries will not be includ-ed/implemented, so consider adding the most representa-tive/popular/interesting sources at this step.
 
-# Hate speech detection
-A couple of methods for finding search terms has been implemented. These include simple string matching, approximate string matching with the use of the suitable met-rics, such as Levenshtein Distance, Damerau-Levenshtein Distance, Jaro Distance, Jaro-Winkler Distance, Match Rating Approach Comparison, Hamming Distance. Term match-ing also aims at being word-suffix agnostic, accommodating the various suffixes that may exist in nouns for many languages (i.e. Greek language features different suffixes gen-der/singular-plural.  A word vector approach has also been tested, taking into account the semantic meaning of the terms. A fixed-dictionary approach (with predefined phrases or terms) and a more agile version featuring dynamic term combinations (i.e. adjectives combined with nouns) are under evaluation.
+# Scraping & data collection
+******************************************************************************************
+SET THIS PARAMETER FOR GATHERING TWEETS VIA THE TWITTER API
+USING THE STREAM FUNCTION. YOU CAN SET THE PARAMETER to "en", 
+"el", "es" or "it" FOR USING the greek, english, spanish, or italian
+keyword list. You can find and modify the keyword lists in the "Keywords" directory.
+Results are stored to "Data/scraper_twitter_data.json".
+Comment the following parameter if you do not want to use this method.
 
+#[TWITTER-STREAM]="el"
+
+******************************************************************************************
+Set this parameter for collecting YouTube comments via the Google API. 
+Please set keywords for searching content, e.g. "migration refugees".
+Results are stored to "Data/scraper_youtube_data.json".
+# Comment the following parameter if you do not want to use this method.
+
+#[YOUTUBE-SEARCH]="μετανάστες"
+#[YOUTUBE-SEARCH-NRESULTS]="200"
+
+******************************************************************************************
+# Set this parameter for collecting texts from a single web page.
+# Please set a URL. The URL can point to an open Facebook group, a
+# single tweet from Twitter, a video from YouTube or any other website.
+# Results are stored to "Data/single_facebook_data.json", 
+# "Data/single_twitter_data.json", "Data/single_youtube_data.json" and 
+# "Data/single_web_data.json" respectively. Website data is unstructured.
+# Examples for each case:
+# https://www.facebook.com/groups/8080169598
+# https://www.twitter.com/Conclavios/status/1285176673214894080
+# https://www.youtube.com/watch?v=fDWFVI8PQOI
+# https://www.makeleio.gr/επικαιροτητα/Ο-υπουργός-παιδεραστής-και-η-αποκάλυ/
+# Comment the following parameter  line if you do not want to use this method.
+
+#[WEBSITE-SINGLE]="https://www.facebook.com/groups/8080169598"
+[WEBSITE-SINGLE]="https://www.facebook.com/groups/129244443820851"
+#[WEBSITE-SINGLE]="https://www.youtube.com/watch?v=7lsj4mBU4_s"
+#[WEBSITE-SINGLE]="https://bit.ly/33b7jLZ"
+
+******************************************************************************************
+# Set this parameter for collecting texts from a single web page.
+# Please set a URL. The URL can point to an open Facebook group, a
+# single tweet from Twitter, a video from YouTube or any other website.
+# Results are stored to "Data/single_facebook_data.json", 
+# "Data/single_twitter_data.json", "Data/single_youtube_data.json" and 
+# "Data/single_web_data.json" respectively. Website data is unstructured.
+# Comment the following parameter  line if you do not want to use this method.
+
+#[WEBSITE-MASS]="http://www.liberoquotidiano.it"
+#[WEBSITE-MASS-CYCLES]="0"
+
+******************************************************************************************
+# Set this parameter for collecting texts from a single web page.
+# Please set a URL. The URL can point to an open Facebook group, a
+# single tweet from Twitter, a video from YouTube or any other website.
+# Results are stored to "Data/single_facebook_data.json", 
+# "Data/single_twitter_data.json", "Data/single_youtube_data.json" and 
+# "Data/single_web_data.json" respectively. Website data is unstructured.
+# Comment the following parameter  line if you do not want to use this method.
+
+#[ANALYZE-DATA]="Data\\scraper_web\\*vimaorthodoxias*_data.json"
 
 # Geographical detection
 Methods/Frameworks Evaluated
@@ -78,5 +135,9 @@ The main/base data field is the text (content), accompanied by the id, annotatio
 
 A custom identifier has been designed, serving as a compact and unique representation of each record retrieved. This numerical value is composed as a synthesis of 2 digits for identifying language, 2 digits for identifying source, 8 digits derived as a hash from the corresponding URL, and 4 digits for enumerating items with the same language
 
+# Hate speech detection
+A couple of methods for finding search terms has been implemented. These include simple string matching, approximate string matching with the use of the suitable met-rics, such as Levenshtein Distance, Damerau-Levenshtein Distance, Jaro Distance, Jaro-Winkler Distance, Match Rating Approach Comparison, Hamming Distance. Term match-ing also aims at being word-suffix agnostic, accommodating the various suffixes that may exist in nouns for many languages (i.e. Greek language features different suffixes gen-der/singular-plural.  A word vector approach has also been tested, taking into account the semantic meaning of the terms. A fixed-dictionary approach (with predefined phrases or terms) and a more agile version featuring dynamic term combinations (i.e. adjectives combined with nouns) are under evaluation.
 
+# Hate speech related entity collection
 
+# How to use the framework

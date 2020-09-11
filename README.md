@@ -136,7 +136,7 @@ Two approaches are implemented (mode=0,1,2). The first one is based in a diction
 "2" the union of the results from both methods is returned.
 
 ### Implementation
-The aforementioned approach is implemented as a method (detect_hate(text, meta, lang, mode=2)) in the analysis_nlp.py file.
+The aforementioned approach is implemented as a method (detect_hate(text, meta, lang, mode) -> matches[]) in the analysis_nlp.py file.
 
 ### Methods/Packages Evaluated
 Package | Pros | Cons | Links
@@ -145,6 +145,11 @@ spacy | Pretrained models (en, es, it, el), lots of linguistic features (part of
 
 # Topic Modeling
 
+### Approach
+a combined method (tfid + lda) is deployed for topic modeling. detected topics and most common terms are printed. a method for topic modeling based on tfid (term frequency–inverse document frequency) approach. a list of topics is created based on a corpus of text items. a method for topic modeling based on lda (latent dirichlet allocation) approach. a list of topics is created based on a corpus of text items.
+
+### Implementation
+The aforementioned approach is implemented as a method (topic_modeling(corpus, language) -> topics, common_words) in the analysis_nlp.py file.
 
 # Hate speech related entity collection
 Topic modeling.

@@ -27,34 +27,42 @@ Progress
 
 # Scraping & Data Collection
 
-### Twitter Tweets via Stream Filtering
+### Approach
+
+### Implementation
+
+#### Twitter tweets via Twitter API
 SET THIS PARAMETER FOR GATHERING TWEETS VIA THE TWITTER API USING THE STREAM FUNCTION. YOU CAN SET THE PARAMETER to "en",  "el", "es" or "it" FOR USING the greek, english, spanish, or italian keyword list. You can find and modify the keyword lists in the "Keywords" directory. Results are stored to "Data/scraper_twitter_data.json". Comment the following parameter if you do not want to use this method.
 
 [TWITTER-STREAM]="el"
 
-### YouTube Comments via Search
+#### YouTube comments via Google API
 Set this parameter for collecting YouTube comments via the Google API.  Please set keywords for searching content, e.g. "migration refugees". Results are stored to "Data/scraper_youtube_data.json". Comment the following parameter if you do not want to use this method.
 
 [YOUTUBE-SEARCH]="μετανάστες"
 [YOUTUBE-SEARCH-NRESULTS]="200"
 
-### Posts and Replies from Specific Facebook Groups & Pages
+#### Posts and Replies from any open Facebook groups or page
 
 [WEBSITE-SINGLE]="https://www.facebook.com/groups/8080169598"
 
-### Comments from a Specific YouTube Videos
+#### Comments from any YouTube video
 [WEBSITE-SINGLE]="https://www.youtube.com/watch?v=7lsj4mBU4_s"
 
-### Articles and comments from monitored websites
-
+#### Articles and comments from monitored websites
 
 [WEBSITE-MASS]="http://www.liberoquotidiano.it"
 [WEBSITE-MASS-CYCLES]="0"
 
-### Text data from a single website
+#### Unstructured text data from any website
 Set this parameter for collecting texts from a single web page. Please set a URL. The URL can point to an open Facebook group, a single tweet from Twitter, a video from YouTube or any other website. Results are stored to "Data/single_facebook_data.json",  "Data/single_twitter_data.json", "Data/single_youtube_data.json" and  "Data/single_web_data.json" respectively. Website data is unstructured.  
 [WEBSITE-SINGLE]="https://bit.ly/33b7jLZ"
 
+### Methods/Packages Evaluated
+Package | Pros | Cons | Links
+--------|------|------|-----
+BeautifulSoup | Easy to use  Popular | Cannot parse dynamic content (i.e. Javascript) |  
+selenium | Can manipulate dynamic content | More difficult to tune data parsers | 
 
 # Datetime Estimation
 A detect datetime from metadata and text. 

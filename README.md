@@ -3,7 +3,7 @@ Set of scripts of algorithms - The algorithm’s scripts will be made available 
 
 # Sources selection
 
-*semi structured
+* semi structured
 22 spanish websites
 12 italian websites
 16 greek websites

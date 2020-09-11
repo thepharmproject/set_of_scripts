@@ -1,0 +1,59 @@
+*** EN ***
+01 http://sioeeu.wordpress.com
+
+*** ES ***
+01 http://okdiario.com
+02 http://www.alertadigital.com
+03 http://www.periodistadigital.com
+04 http://www.elespanol.com
+05 http://www.diarioya.es
+06 http://gaceta.es
+07 http://www.voxespana.es
+08 http://www.actuall.com
+09 http://casoaislado.com
+10 http://www.outono.net
+11 http://www.lasvocesdelpueblo.com
+12 http://disidentia.com
+13 http://elcorreodeespana.com
+14 http://www.mediterraneodigital.com
+15 http://www.elcorreo.com
+16 http://www.diariosur.es
+17* http://www.huelvainformacion.es
+18 http://www.hoy.es
+19 *http://somatemps.me
+20 http://espana2000.es
+21 http://www.tradicionviva.es
+22* http://manos-limpias.es
+23* http://www.laverdad.es
+
+*** IT ***
+01 http://www.termometropolitico.it
+02 http://www.gazzetta.it
+03! http://www.liberoquotidiano.it
+04 http://www.fratelli-italia.it
+05 http://www.la7.it
+06 http://www.ilpopulista.it
+07 http://www.imolaoggi.it
+08 http://www.destra.it
+09 http://xn--identit-fwa.com
+10 http://www.cartadiroma.org/news
+11 http://www.rainews.it
+12 http://www.ilprimatonazionale.it
+
+*** EL ***
+01 http://www.pentapostagma.gr
+02 http://www.makeleio.gr
+03 http://katohika.gr
+04 http://infognomonpolitics.gr
+05 http://defencereview.gr
+06* http://www.olympia.gr
+07 http://voicenews.gr
+08 http://www.vimaorthodoxias.gr
+09 http://arxaiaithomi.gr
+10 http://www.ekklisiaonline.gr
+11* http://hellenicns.gr
+12 http://www.elikoncc.info
+13 http://www.skai.gr
+14 http://www.protothema.gr
+15* http://www.pronews.gr/
+16* http://thepressproject.gr

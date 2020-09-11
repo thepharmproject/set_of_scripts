@@ -1,4 +1,4 @@
-# Set of scripts of algorithms for the PHARM project
+# Set of scripts for the PHARM project
 Set of scripts of algorithms - The algorithm’s scripts will be made available in Github so they can be shared with the rest of the team, but also with external stakeholders. The URL of the scripts in Github will allow its evaluation by testing if all scripts can be run with the corresponding expected result (download of contents from different digital and social media, automated classification, etc.). 
 
 # Sources selection

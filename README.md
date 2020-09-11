@@ -1,7 +1,7 @@
 # Set of scripts for the PHARM project
 Set of scripts of algorithms - The algorithm’s scripts will be made available in Github so they can be shared with the rest of the team, but also with external stakeholders. The URL of the scripts in Github will allow its evaluation by testing if all scripts can be run with the corresponding expected result (download of contents from different digital and social media, automated classification, etc.). 
 
-# Sources selection
+# Sources Selection
 
 * semi structured
 - 22 spanish websites
@@ -25,31 +25,36 @@ any website
 Progress
 •	The list is a preliminary attempt to review the most important/popular sources for each region/language, so as to examine/evaluate the technical needs/difficulties for developing data scraping algorithms for each individual website/platform. It is probable that some entries will not be includ-ed/implemented, so consider adding the most representa-tive/popular/interesting sources at this step.
 
-# Scraping & data collection
+# Scraping & Data Collection
+
+### Twitter Tweets via Stream Filtering
 SET THIS PARAMETER FOR GATHERING TWEETS VIA THE TWITTER API USING THE STREAM FUNCTION. YOU CAN SET THE PARAMETER to "en",  "el", "es" or "it" FOR USING the greek, english, spanish, or italian keyword list. You can find and modify the keyword lists in the "Keywords" directory. Results are stored to "Data/scraper_twitter_data.json". Comment the following parameter if you do not want to use this method.
 
 [TWITTER-STREAM]="el"
 
+### YouTube Comments via Search
 Set this parameter for collecting YouTube comments via the Google API.  Please set keywords for searching content, e.g. "migration refugees". Results are stored to "Data/scraper_youtube_data.json". Comment the following parameter if you do not want to use this method.
 
 [YOUTUBE-SEARCH]="μετανάστες"
 [YOUTUBE-SEARCH-NRESULTS]="200"
 
-Set this parameter for collecting texts from a single web page. Please set a URL. The URL can point to an open Facebook group, a single tweet from Twitter, a video from YouTube or any other website. Results are stored to "Data/single_facebook_data.json",  "Data/single_twitter_data.json", "Data/single_youtube_data.json" and  "Data/single_web_data.json" respectively. Website data is unstructured.
+### Posts and Replies from Specific Facebook Groups & Pages
 
 [WEBSITE-SINGLE]="https://www.facebook.com/groups/8080169598"
-[WEBSITE-SINGLE]="https://www.facebook.com/groups/129244443820851"
-[WEBSITE-SINGLE]="https://www.youtube.com/watch?v=7lsj4mBU4_s"
-[WEBSITE-SINGLE]="https://bit.ly/33b7jLZ"
 
-Set this parameter for collecting texts from a single web page. Please set a URL. The URL can point to an open Facebook group, a single tweet from Twitter, a video from YouTube or any other website. Results are stored to "Data/single_facebook_data.json",  "Data/single_twitter_data.json", "Data/single_youtube_data.json" and  "Data/single_web_data.json" respectively. Website data is unstructured. Comment the following parameter  line if you do not want to use this method.
+### Comments from a Specific YouTube Videos
+[WEBSITE-SINGLE]="https://www.youtube.com/watch?v=7lsj4mBU4_s"
+
+### Articles and comments from monitored websites
+
 
 [WEBSITE-MASS]="http://www.liberoquotidiano.it"
 [WEBSITE-MASS-CYCLES]="0"
 
-Set this parameter for collecting texts from a single web page. Please set a URL. The URL can point to an open Facebook group, a single tweet from Twitter, a video from YouTube or any other website. Results are stored to "Data/single_facebook_data.json",  "Data/single_twitter_data.json", "Data/single_youtube_data.json" and  "Data/single_web_data.json" respectively. Website data is unstructured. Comment the following parameter  line if you do not want to use this method.
+### Text data from a single website
+Set this parameter for collecting texts from a single web page. Please set a URL. The URL can point to an open Facebook group, a single tweet from Twitter, a video from YouTube or any other website. Results are stored to "Data/single_facebook_data.json",  "Data/single_twitter_data.json", "Data/single_youtube_data.json" and  "Data/single_web_data.json" respectively. Website data is unstructured.  
+[WEBSITE-SINGLE]="https://bit.ly/33b7jLZ"
 
-[ANALYZE-DATA]="Data\\scraper_web\\*vimaorthodoxias*_data.json"
 
 # Datetime Estimation
 A detect datetime from metadata and text. 

@@ -40,7 +40,6 @@ Google Geocoding
 Others
 	Most of them require an API with a paid subscription.
 
-
 # Language detection
 Packages Evaluated
 textblob
@@ -63,5 +62,21 @@ alchemyapi (Alchemy API)
 Pros: To be tested (maybe).
 Cons: No anaconda package, no longer supported by IBM.
 https://github.com/AlchemyAPI/alchemyapi_python
+
+# Metadata selection
+Taking into account the requirements of the project (i.e. PHARM might use some rele-vant extra information for hate speech analysis), the sources that will be used for gath-ering the relevant content (i.e. Website articles and comments, YouTube comments and Twitter tweets), interoperability and compatibility considerations for import-ing/exporting data to third party applications that may/should be exploited (i.e. docca-no platform for annotation), the following general specifications have been set:
+
+Format	| JSON
+--------|------
+Identifier	| doccano ID and/or PID
+Data grouping |	PHARM ID (PID) or source url
+Annotations	| labels from doccano – annotation data
+Metadata |	fields may vary from across sources
+Text |	payload
+
+The main/base data field is the text (content), accompanied by the id, annotations and meta fields. Meta field is a container, including all additional data. A fundamen-tal/minimum set of metadata will be used for all platforms. These will be the Pharm ID (PID), the source URL, the title, author, date, tags and categories. These fields are more probable to be found for all records across different sources. The following figure gives a hierarchical view of the proposed data scheme.
+
+A custom identifier has been designed, serving as a compact and unique representation of each record retrieved. This numerical value is composed as a synthesis of 2 digits for identifying language, 2 digits for identifying source, 8 digits derived as a hash from the corresponding URL, and 4 digits for enumerating items with the same language
+
 
 

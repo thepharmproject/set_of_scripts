@@ -52,18 +52,13 @@ Set this parameter for collecting texts from a single web page. Please set a URL
 [ANALYZE-DATA]="Data\\scraper_web\\*vimaorthodoxias*_data.json"
 
 # Geographical detection
-Methods/Frameworks Evaluated
-spacy
-Pros: Pretrained models (en, es, it, el), lots of linguistic features (part of speech tagging, entity recognition, tokenization, lemmatization, rule based matching, word vectors, etc.). 
-Cons: Models with vectors are slow.
-https://anaconda.org/conda-forge/spacy
-https://spacy.io/usage
-https://spacy.io/usage/linguistic-features#named-entities
-Geopy
-Pros: Easy to use, lots of geocoders.
-Cons: None (so far).
-https://anaconda.org/conda-forge/geopy
-https://geopy.readthedocs.io
+
+### Approach
+### Methods/Packages Evaluated
+Package | Pros | Cons | Links
+--------|------|------|-----
+spacy | Pretrained models (en, es, it, el), lots of linguistic features (part of speech tagging, entity recognition, tokenization, lemmatization, rule based matching, word vectors, etc.). | Models with vectors are slow. | https://anaconda.org/conda-forge/spacy  https://spacy.io/usage  https://spacy.io/usage/linguistic-features#named-entities
+Geopy | Easy to use, lots of geocoders. | None (so far). | https://anaconda.org/conda-forge/geopy  https://geopy.readthedocs.io
 Geopy is a Python 2 and 3 client for several popular geocoding web services. Geopy makes it easy for Python developers to locate the coordinates of addresses, cities, coun-tries, and landmarks across the globe using third-party geocoders and other data sources. Geopy includes geocoder classes for the OpenStreetMap Nominatim, ESRI ArcGIS, Google Geocoding API, Baidu Maps, Bing Maps API, Yahoo! PlaceFinder, Yandex, IGN France, etc.
 https://python.libhunt.com/geopy-alternatives
 Geocoders for Geopy
@@ -83,7 +78,7 @@ A chained approach is adopted for improved robustness. textblob, google translat
 the result form the next one is requested.  
 ### Implementation
 The aforementioned approach is implemented as a method (detect_language(text) -> language) in the analysis_nlp.py file.
-### Packages Evaluated
+### Methods/Packages Evaluated
 Package | Pros | Cons | Link
 --------|------|------|-----
 textblob | Accurate and easy to use | Limited requests. | https://anaconda.org/conda-forge/textblob

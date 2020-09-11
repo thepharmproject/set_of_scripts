@@ -77,7 +77,7 @@ Others
 	Most of them require an API with a paid subscription.
 
 # Language detection
-Detect language from text. 
+PHARM scripts can detect hate speech in texts produced in Italian, Greek and Spanish, but many of the sources might have contents in other foreign languages or local dialects. To work with the three national languages, we find that we must select a procedure to detect the language of the media text when it is not properly declared. There already exist many algorithms designed to automatically detect the language in different kinds of texts within a range of probability. 
 ### Approach
 A chained approach is adopted for improved robustness. textblob, google translate and langdetect services are exploited. If a service fails
 the result form the next one is requested.  

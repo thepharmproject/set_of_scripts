@@ -54,11 +54,16 @@ Set this parameter for collecting texts from a single web page. Please set a URL
 # Geographical detection
 
 ### Approach
+A method for detecting geolocation from text. geopy with nominatim geocoder are used. entities in the following ranking are preferred: GPE (countries, cities, states), LOC (mountains, bodies of water), FAC (buildings, airports, highways etc.), ORG (companies, agancies, institutions etc.).
+
+### Implementation
+The aforementioned approach is implemented as a method (detect_location(text, meta, lang) -> locations) in the analysis_nlp.py file.
+
 ### Methods/Packages Evaluated
 Package | Pros | Cons | Links
 --------|------|------|-----
-spacy | Pretrained models (en, es, it, el), lots of linguistic features (part of speech tagging, entity recognition, tokenization, lemmatization, rule based matching, word vectors, etc.). | Models with vectors are slow. | https://anaconda.org/conda-forge/spacy  https://spacy.io/usage  https://spacy.io/usage/linguistic-features#named-entities
 Geopy | Easy to use, lots of geocoders. | None (so far). | https://anaconda.org/conda-forge/geopy  https://geopy.readthedocs.io
+
 Geopy is a Python 2 and 3 client for several popular geocoding web services. Geopy makes it easy for Python developers to locate the coordinates of addresses, cities, coun-tries, and landmarks across the globe using third-party geocoders and other data sources. Geopy includes geocoder classes for the OpenStreetMap Nominatim, ESRI ArcGIS, Google Geocoding API, Baidu Maps, Bing Maps API, Yahoo! PlaceFinder, Yandex, IGN France, etc.
 https://python.libhunt.com/geopy-alternatives
 Geocoders for Geopy
@@ -71,13 +76,17 @@ Google Geocoding
 Others
 	Most of them require an API with a paid subscription.
 
+
 # Language detection
 PHARM scripts can detect hate speech in texts produced in Italian, Greek and Spanish, but many of the sources might have contents in other foreign languages or local dialects. To work with the three national languages, we find that we must select a procedure to detect the language of the media text when it is not properly declared. There already exist many algorithms designed to automatically detect the language in different kinds of texts within a range of probability. 
+
 ### Approach
 A chained approach is adopted for improved robustness. textblob, google translate and langdetect services are exploited. If a service fails
 the result form the next one is requested.  
+
 ### Implementation
 The aforementioned approach is implemented as a method (detect_language(text) -> language) in the analysis_nlp.py file.
+
 ### Methods/Packages Evaluated
 Package | Pros | Cons | Link
 --------|------|------|-----
@@ -86,6 +95,7 @@ googletrans | Accurate and easy to use. | None (so far). | https://anaconda.org/
 pycld2 | Reports estimation reliability. | Only for linux python envs. | https://anaconda.org/syllabs_admin/pycld2
 langdetect | Seems accurate, easy to use. | None (so far). | https://anaconda.org/conda-forge/langdetect
 alchemyapi | - | No anaconda package, no longer supported by IBM. | https://github.com/AlchemyAPI/alchemyapi_python
+
 
 # Metadata selection
 Taking into account the requirements of the project (i.e. PHARM might use some rele-vant extra information for hate speech analysis), the sources that will be used for gath-ering the relevant content (i.e. Website articles and comments, YouTube comments and Twitter tweets), interoperability and compatibility considerations for import-ing/exporting data to third party applications that may/should be exploited (i.e. docca-no platform for annotation), the following general specifications have been set:
@@ -104,6 +114,19 @@ A custom identifier has been designed, serving as a compact and unique represent
 
 # Hate speech detection
 A couple of methods for finding search terms has been implemented. These include simple string matching, approximate string matching with the use of the suitable met-rics, such as Levenshtein Distance, Damerau-Levenshtein Distance, Jaro Distance, Jaro-Winkler Distance, Match Rating Approach Comparison, Hamming Distance. Term match-ing also aims at being word-suffix agnostic, accommodating the various suffixes that may exist in nouns for many languages (i.e. Greek language features different suffixes gen-der/singular-plural.  A word vector approach has also been tested, taking into account the semantic meaning of the terms. A fixed-dictionary approach (with predefined phrases or terms) and a more agile version featuring dynamic term combinations (i.e. adjectives combined with nouns) are under evaluation.
+
+### Approach
+Two approaches are implemented (mode=0,1,2). The first one is based in a dictionary of terms for four different languages, english, greek, italian and spanish. A language model is loaded (according to the language of the text), common practices are followed (lowercasing, lemmatization, stop word and punctuation removal), and the targeted terms are being searched in the text. If a term (or combination of terms) is found, text segments are denoted as "hate speech". The second one is based in word vectors allowing for a more semantic detection. The same workflow is followed for this method as well (lemmatization etc.). if mode is set to
+"2" the union of the results from both methods is returned.
+
+### Implementation
+The aforementioned approach is implemented as a method (detect_hate(text, meta, lang, mode=2)) in the analysis_nlp.py file.
+
+### Methods/Packages Evaluated
+Package | Pros | Cons | Links
+--------|------|------|-----
+spacy | Pretrained models (en, es, it, el), lots of linguistic features (part of speech tagging, entity recognition, tokenization, lemmatization, rule based matching, word vectors, etc.). | Models with vectors are slow. | https://anaconda.org/conda-forge/spacy  https://spacy.io/usage  https://spacy.io/usage/linguistic-features#named-entities
+
 
 # Hate speech related entity collection
 Topic modeling.

@@ -28,35 +28,28 @@ Progress
 # Scraping & Data Collection
 
 ### Approach
+A method for detecting geolocation from text. geopy with nominatim geocoder are used. entities in the following ranking are preferred: GPE (countries, cities, states), LOC (mountains, bodies of water), FAC (buildings, airports, highways etc.), ORG (companies, agancies, institutions etc.).
 
 ### Implementation
+The aforementioned approach is coded in couple of python files. In specific scraper_twitter.py, scraper_web.py, scraper_youtube.py, single_facebook.py, single_web.py and single_youtube.py files implement the necessary routines for collecting text content from the web.
 
 #### Twitter tweets via Twitter API
-SET THIS PARAMETER FOR GATHERING TWEETS VIA THE TWITTER API USING THE STREAM FUNCTION. YOU CAN SET THE PARAMETER to "en",  "el", "es" or "it" FOR USING the greek, english, spanish, or italian keyword list. You can find and modify the keyword lists in the "Keywords" directory. Results are stored to "Data/scraper_twitter_data.json". Comment the following parameter if you do not want to use this method.
-
-[TWITTER-STREAM]="el"
+The project supports text collection from the twitter via the appropriate API and the stream method. Tweepy library for accessing the Twitter API is used. Four dictionaries for filtering tweets have been developed including greek, english, spanish and italian keywords. These can been found in the "Keywords" directory. Results are stored to the "Data/scraper_twitter_data.json" file.
 
 #### YouTube comments via Google API
-Set this parameter for collecting YouTube comments via the Google API.  Please set keywords for searching content, e.g. "migration refugees". Results are stored to "Data/scraper_youtube_data.json". Comment the following parameter if you do not want to use this method.
-
-[YOUTUBE-SEARCH]="μετανάστες"
-[YOUTUBE-SEARCH-NRESULTS]="200"
+YouTube comment collection is also supoorted via the Google API. Please set keywords for searching content, e.g. "migration refugees". Results are stored to the "Data/scraper_youtube_data.json" file.
 
 #### Posts and Replies from any open Facebook groups or page
-
-[WEBSITE-SINGLE]="https://www.facebook.com/groups/8080169598"
+The selenium package is used to automate web browser interaction from Python. Results are stored to the "Data/single_web_data.json" file.
 
 #### Comments from any YouTube video
-[WEBSITE-SINGLE]="https://www.youtube.com/watch?v=7lsj4mBU4_s"
+The selenium package is used to automate web browser interaction from Python.
 
 #### Articles and comments from monitored websites
-
-[WEBSITE-MASS]="http://www.liberoquotidiano.it"
-[WEBSITE-MASS-CYCLES]="0"
+The selenium package is used to automate web browser interaction from Python, along with Beautiful Soup, which is a library that makes it easy to scrape information from web pages. It sits atop an HTML or XML parser, providing Pythonic idioms for iterating, searching, and modifying the parse tree.
 
 #### Unstructured text data from any website
 Set this parameter for collecting texts from a single web page. Please set a URL. The URL can point to an open Facebook group, a single tweet from Twitter, a video from YouTube or any other website. Results are stored to "Data/single_facebook_data.json",  "Data/single_twitter_data.json", "Data/single_youtube_data.json" and  "Data/single_web_data.json" respectively. Website data is unstructured.  
-[WEBSITE-SINGLE]="https://bit.ly/33b7jLZ"
 
 ### Methods/Packages Evaluated
 Package | Pros | Cons | Links

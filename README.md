@@ -54,9 +54,9 @@ Set this parameter for collecting texts from a single web page. Please set a URL
 ### Methods/Packages Evaluated
 Package | Pros | Cons | Links
 --------|------|------|-----
-BeautifulSoup | Easy to use  Popular | Cannot parse dynamic content (i.e. Javascript) | https://anaconda.org/anaconda/beautifulsoup4 <br> https://pypi.org/project/beautifulsoup4/
+BeautifulSoup | Easy to use <br> Popular | Cannot parse dynamic content (i.e. Javascript) | https://anaconda.org/anaconda/beautifulsoup4 <br> https://pypi.org/project/beautifulsoup4/
 selenium | Can manipulate dynamic content | More difficult to tune data parsers | https://anaconda.org/anaconda/selenium <br> https://pypi.org/project/selenium/
-tweepy | | Comptatibility issues between versions | https://anaconda.org/conda-forge/tweepy <br> https://tweepi.com/
+tweepy | Easy to use | Compatibility issues between versions | https://anaconda.org/conda-forge/tweepy <br> https://tweepi.com/
 
 # Datetime Estimation
 A detect datetime from metadata and text. 

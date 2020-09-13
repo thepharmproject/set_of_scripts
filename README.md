@@ -148,37 +148,40 @@ a combined method (tfid + lda) is deployed for topic modeling. detected topics a
 ### Implementation
 The aforementioned approach is implemented as a method (topic_modeling(corpus, language) -> topics, common_words) in the analysis_nlp.py file.
 
-## Hate speech related entity collection
+## Eentity Collection for Hate Speech
 Topic modeling.
 
-# How to use
-Please see the instructions in the Config/main.txt configuration file.
+# How to run the project
+Review the first lines of code (marked as "PYTHON SETUP") in the various Python files of the project to install the necessary libraries for executing the project. Use the "main.py" file as the starting script to run the code. The various workflows/analyses can be selected via the "Config/main.txt" configuration file. Instructions for controlling the workflow are following and are also included in the main configuration file. This set of scripts can execute various text-data collection and processing tasks, as specified by the requirements of the PHARM project. These tasks can be grouped into two main categories: data collection and data analysis.
 
 ### [TWITTER-STREAM]
+Set this parameter to collect tweets via Twitter's stream function. Set the paramater to "en",  "el", "es" or "it" to use the greek, english, spanish, or italian keyword list. You can find and modify the keyword lists in the "Keywords" directory. Results are stored to "Data/scraper_twitter_data.json". Comment out the following line to skip this type of data collection.  
 
-SET THIS PARAMETER FOR GATHERING TWEETS VIA THE TWITTER API USING THE STREAM FUNCTION. YOU CAN SET THE PARAMETER to "en",  "el", "es" or "it" FOR USING the greek, english, spanish, or italian keyword list. You can find and modify the keyword lists in the "Keywords" directory. Results are stored to "Data/scraper_twitter_data.json". Comment the following parameter if you do not want to use this method.
 [TWITTER-STREAM]="el"
 
 ### [YOUTUBE-SEARCH] & [YOUTUBE-SEARCH-NRESULTS]
-Set this parameter for collecting YouTube comments via the Google API.  Please set keywords for searching content, e.g. "migration refugees". Results are stored to "Data/scraper_youtube_data.json". Comment the following parameter if you do not want to use this method.  
+Set these parameters for collecting YouTube comments via the Google API. Use the [YOUTUBE-SEARCH] parameter to set the keywords for searching content, e.g. "migration refugees" and the [YOUTUBE-SEARCH-NRESULTS] parameter to regulate the number of returned results. Results are stored to "Data/scraper_youtube_data.json". Comment the following lines if you do not want to use this method.  
   
 [YOUTUBE-SEARCH]="μετανάστες"  
 [YOUTUBE-SEARCH-NRESULTS]="200"
 
 ### [WEBSITE-SINGLE]
-Set this parameter for collecting texts from a single web page. Please set a URL. The URL can point to an open Facebook group, a video from YouTube or any other website. Results are stored to "Data/single_facebook_data.json", "Data/single_youtube_data.json" and  "Data/single_web_data.json" respectively. Website data is unstructured. Comment the following parameter line if you do not want to use this method. Examples for each case:  
-https://www.facebook.com/groups/8080169598  
-https://www.youtube.com/watch?v=fDWFVI8PQOI  
-https://www.makeleio.gr/επικαιροτητα/Ο-υπουργός-παιδεραστής-και-η-αποκάλυ/  
+Set this parameter for collecting texts from a single webpage. Simply set the URL of the webpage. The URL can point to an open Facebook Group or Page, a YouTube video or any other website. Results are stored to "Data/single_facebook_data.json", "Data/single_youtube_data.json" and  "Data/single_web_data.json" respectively. Data management is semi-structured for the Facebook and YouTube platfors, whereas is unstructured for the rest of the webpages. Comment out the following lines to skip this type of data collection.
   
 [WEBSITE-SINGLE]="https://www.facebook.com/groups/8080169598"  
+[WEBSITE-SINGLE]="https://www.facebook.com/playcompass"
+[WEBSITE-SINGLE]="https://www.youtube.com/watch?v=fDWFVI8PQOI"
+[WEBSITE-SINGLE]="https://bit.ly/33b7jLZ"
 
 ### [WEBSITE-MASS] & [WEBSITE-MASS-CYCLES]
-Set this parameter for collecting texts from a single web page. Please set a URL. The URL can point to an open Facebook group, a single tweet from Twitter, a video from YouTube or any other website. Results are stored to "Data/single_facebook_data.json",  "Data/single_twitter_data.json", "Data/single_youtube_data.json" and  "Data/single_web_data.json" respectively. Website data is unstructured. Comment the following parameter  line if you do not want to use this method.  
+Set these two parameters for collecting articles and comments from the supported websites for structured scraping. The list of the supported websites is stored in the "Config/websites.txt" file. Make use of the [WEBSITE-MASS] and [WEBSITE-MASS-CYCLES] to set the URL and to define the number of scans/cycles the spider will perform to the site, respectively. The algorithm automatically discovers  different pages/articles within the site, keeps a list of already visited hyperlinks, stores content and continues to a new unvisited destination. Results are stored to seperate, according the name of the site, files in the "Data/scraper_web/" directory. Comment out the following lines for skipping this type of data collection. 
+   
 [WEBSITE-MASS]="http://www.voxespana.es"  
-[WEBSITE-MASS-CYCLES]="0"
+[WEBSITE-MASS-CYCLES]="100"
 
 ### [ANALYZE-DATA]
-Set this parameter for collecting texts from a single web page. Please set a URL. The URL can point to an open Facebook group, a single tweet from Twitter, a video from YouTube or any other website. Results are stored to "Data/single_facebook_data.json",  "Data/single_twitter_data.json", "Data/single_youtube_data.json" and  "Data/single_web_data.json" respectively. Website data is unstructured. Comment the following parameter  line if you do not want to use this method.  
+Set this parameter for executing the data analyses procedures, acoording to the project's requirements, such as topic modeling, language detection, geolocation estimation, daterime parsing, hate speech detection etc. These analyses will be refined and updated with new functions, according to the project's timeline. The analyses can be applied to the data that is collected and stored in the "Data" directory. Use the following parameter to point to a specific file. Once the script finishes, a new file with the same name as the originan and with the "_processed" suffix will be generated. Derived data can be used for manual annotation (for hate speech), or, generally, for developing a "hate speech" corpus.
 
 [ANALYZE-DATA]="Data\\scraper_web\\*vimaorthodoxias*_data.json"
+
+

@@ -175,11 +175,13 @@ Set this parameter for collecting YouTube comments via the Google API.  Please s
 [YOUTUBE-SEARCH-NRESULTS]="200"
 
 ### [WEBSITE-SINGLE]
-Set this parameter for collecting texts from a single web page. Please set a URL. The URL can point to an open Facebook group, a single tweet from Twitter, a video from YouTube or any other website. Results are stored to "Data/single_facebook_data.json", "Data/single_twitter_data.json", "Data/single_youtube_data.json" and  "Data/single_web_data.json" respectively. Website data is unstructured. Examples for each case: https://www.facebook.com/groups/8080169598 https://www.twitter.com/Conclavios/status/1285176673214894080 https://www.youtube.com/watch?v=fDWFVI8PQOI https://www.makeleio.gr/επικαιροτητα/Ο-υπουργός-παιδεραστής-και-η-αποκάλυ/ Comment the following parameter  line if you do not want to use this method.  
+Set this parameter for collecting texts from a single web page. Please set a URL. The URL can point to an open Facebook group, a video from YouTube or any other website. Results are stored to "Data/single_facebook_data.json", "Data/single_youtube_data.json" and  "Data/single_web_data.json" respectively. Website data is unstructured. Examples for each case:  
+https://www.facebook.com/groups/8080169598  
+https://www.youtube.com/watch?v=fDWFVI8PQOI  
+https://www.makeleio.gr/επικαιροτητα/Ο-υπουργός-παιδεραστής-και-η-αποκάλυ/  
+Comment the following parameter  line if you do not want to use this method.  
+  
 [WEBSITE-SINGLE]="https://www.facebook.com/groups/8080169598"  
-[WEBSITE-SINGLE]="https://www.facebook.com/groups/129244443820851"  
-[WEBSITE-SINGLE]="https://www.youtube.com/watch?v=7lsj4mBU4_s"  
-[WEBSITE-SINGLE]="https://bit.ly/33b7jLZ"
 
 ### [WEBSITE-MASS] & [WEBSITE-MASS-CYCLES]
 Set this parameter for collecting texts from a single web page. Please set a URL. The URL can point to an open Facebook group, a single tweet from Twitter, a video from YouTube or any other website. Results are stored to "Data/single_facebook_data.json",  "Data/single_twitter_data.json", "Data/single_youtube_data.json" and  "Data/single_web_data.json" respectively. Website data is unstructured. Comment the following parameter  line if you do not want to use this method.  

@@ -175,11 +175,10 @@ Set this parameter for collecting YouTube comments via the Google API.  Please s
 [YOUTUBE-SEARCH-NRESULTS]="200"
 
 ### [WEBSITE-SINGLE]
-Set this parameter for collecting texts from a single web page. Please set a URL. The URL can point to an open Facebook group, a video from YouTube or any other website. Results are stored to "Data/single_facebook_data.json", "Data/single_youtube_data.json" and  "Data/single_web_data.json" respectively. Website data is unstructured. Examples for each case:  
+Set this parameter for collecting texts from a single web page. Please set a URL. The URL can point to an open Facebook group, a video from YouTube or any other website. Results are stored to "Data/single_facebook_data.json", "Data/single_youtube_data.json" and  "Data/single_web_data.json" respectively. Website data is unstructured. Comment the following parameter line if you do not want to use this method. Examples for each case:  
 https://www.facebook.com/groups/8080169598  
 https://www.youtube.com/watch?v=fDWFVI8PQOI  
 https://www.makeleio.gr/επικαιροτητα/Ο-υπουργός-παιδεραστής-και-η-αποκάλυ/  
-Comment the following parameter  line if you do not want to use this method.  
   
 [WEBSITE-SINGLE]="https://www.facebook.com/groups/8080169598"  
 

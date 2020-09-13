@@ -181,9 +181,10 @@ Set this parameter for collecting texts from a single web page. Please set a URL
 [WEBSITE-SINGLE]="https://www.youtube.com/watch?v=7lsj4mBU4_s"  
 [WEBSITE-SINGLE]="https://bit.ly/33b7jLZ"
 
-### [WEBSITE-MASS]
+### [WEBSITE-MASS] & [WEBSITE-MASS-CYCLES]
 Set this parameter for collecting texts from a single web page. Please set a URL. The URL can point to an open Facebook group, a single tweet from Twitter, a video from YouTube or any other website. Results are stored to "Data/single_facebook_data.json",  "Data/single_twitter_data.json", "Data/single_youtube_data.json" and  "Data/single_web_data.json" respectively. Website data is unstructured. Comment the following parameter  line if you do not want to use this method.  
-[WEBSITE-MASS]="http://www.voxespana.es"[WEBSITE-MASS-CYCLES]="0"
+[WEBSITE-MASS]="http://www.voxespana.es"  
+[WEBSITE-MASS-CYCLES]="0"
 
 ### [ANALYZE-DATA]
 Set this parameter for collecting texts from a single web page. Please set a URL. The URL can point to an open Facebook group, a single tweet from Twitter, a video from YouTube or any other website. Results are stored to "Data/single_facebook_data.json",  "Data/single_twitter_data.json", "Data/single_youtube_data.json" and  "Data/single_web_data.json" respectively. Website data is unstructured. Comment the following parameter  line if you do not want to use this method.  

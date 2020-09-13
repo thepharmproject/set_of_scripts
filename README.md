@@ -1,7 +1,7 @@
-# Set of scripts for the PHARM project
+# Project Description
 Set of scripts of algorithms - The algorithm’s scripts will be made available in Github so they can be shared with the rest of the team, but also with external stakeholders. The URL of the scripts in Github will allow its evaluation by testing if all scripts can be run with the corresponding expected result (download of contents from different digital and social media, automated classification, etc.). 
 
-# Sources Selection
+## Sources Selection
 
 * semi structured
 - 22 spanish websites
@@ -25,7 +25,7 @@ any website
 Progress
 •	The list is a preliminary attempt to review the most important/popular sources for each region/language, so as to examine/evaluate the technical needs/difficulties for developing data scraping algorithms for each individual website/platform. It is probable that some entries will not be includ-ed/implemented, so consider adding the most representa-tive/popular/interesting sources at this step.
 
-# Scraping & Data Collection
+## Scraping & Data Collection
 
 ### Approach
 A method for detecting geolocation from text. geopy with nominatim geocoder are used. entities in the following ranking are preferred: GPE (countries, cities, states), LOC (mountains, bodies of water), FAC (buildings, airports, highways etc.), ORG (companies, agancies, institutions etc.).
@@ -58,7 +58,7 @@ BeautifulSoup | Easy to use <br> Popular | Cannot parse dynamic content (i.e. Ja
 selenium | Can manipulate dynamic content | More difficult to tune data parsers | https://anaconda.org/anaconda/selenium <br> https://pypi.org/project/selenium/
 tweepy | Easy to use | Compatibility issues between versions | https://anaconda.org/conda-forge/tweepy <br> https://tweepi.com/
 
-# Datetime Estimation
+## Datetime Estimation
 A detect datetime from metadata and text. 
 
 ### Approach
@@ -74,7 +74,7 @@ dateparser | Relatively high accuracy. | Limited estimations. |
 datefinder | Lower accuracy. | More estimations, returns a list of estimations. |
 parsedatetime | Baseline method. | Datetime scheme should be defined. |  
 
-# Geolocation Estimation
+## Geolocation Estimation
 
 ### Approach
 A method for detecting geolocation from text. geopy with nominatim geocoder are used. entities in the following ranking are preferred: GPE (countries, cities, states), LOC (mountains, bodies of water), FAC (buildings, airports, highways etc.), ORG (companies, agancies, institutions etc.).
@@ -100,7 +100,7 @@ Others
 	Most of them require an API with a paid subscription.
 
 
-# Language Detection
+## Language Detection
 PHARM scripts can detect hate speech in texts produced in Italian, Greek and Spanish, but many of the sources might have contents in other foreign languages or local dialects. To work with the three national languages, we find that we must select a procedure to detect the language of the media text when it is not properly declared. There already exist many algorithms designed to automatically detect the language in different kinds of texts within a range of probability. 
 
 ### Approach
@@ -120,7 +120,7 @@ langdetect | Seems accurate, easy to use. | None (so far). | https://anaconda.or
 alchemyapi | - | No anaconda package, no longer supported by IBM. | https://github.com/AlchemyAPI/alchemyapi_python
 
 
-# Metadata Selection
+## Metadata Selection
 Taking into account the requirements of the project (i.e. PHARM might use some rele-vant extra information for hate speech analysis), the sources that will be used for gath-ering the relevant content (i.e. Website articles and comments, YouTube comments and Twitter tweets), interoperability and compatibility considerations for import-ing/exporting data to third party applications that may/should be exploited (i.e. docca-no platform for annotation), the following general specifications have been set:
 
 Format	| JSON
@@ -135,7 +135,7 @@ The main/base data field is the text (content), accompanied by the id, annotatio
 
 A custom identifier has been designed, serving as a compact and unique representation of each record retrieved. This numerical value is composed as a synthesis of 2 digits for identifying language, 2 digits for identifying source, 8 digits derived as a hash from the corresponding URL, and 4 digits for enumerating items with the same language
 
-# Hate Speech Detection
+## Hate Speech Detection
 A couple of methods for finding search terms has been implemented. These include simple string matching, approximate string matching with the use of the suitable met-rics, such as Levenshtein Distance, Damerau-Levenshtein Distance, Jaro Distance, Jaro-Winkler Distance, Match Rating Approach Comparison, Hamming Distance. Term match-ing also aims at being word-suffix agnostic, accommodating the various suffixes that may exist in nouns for many languages (i.e. Greek language features different suffixes gen-der/singular-plural.  A word vector approach has also been tested, taking into account the semantic meaning of the terms. A fixed-dictionary approach (with predefined phrases or terms) and a more agile version featuring dynamic term combinations (i.e. adjectives combined with nouns) are under evaluation.
 
 ### Approach
@@ -150,7 +150,7 @@ Package | Pros | Cons | Links
 --------|------|------|-----
 spacy | Pretrained models (en, es, it, el), lots of linguistic features (part of speech tagging, entity recognition, tokenization, lemmatization, rule based matching, word vectors, etc.). | Models with vectors are slow. | https://anaconda.org/conda-forge/spacy  https://spacy.io/usage  https://spacy.io/usage/linguistic-features#named-entities
 
-# Topic Modeling
+## Topic Modeling
 
 ### Approach
 a combined method (tfid + lda) is deployed for topic modeling. detected topics and most common terms are printed. a method for topic modeling based on tfid (term frequency–inverse document frequency) approach. a list of topics is created based on a corpus of text items. a method for topic modeling based on lda (latent dirichlet allocation) approach. a list of topics is created based on a corpus of text items.
@@ -158,7 +158,7 @@ a combined method (tfid + lda) is deployed for topic modeling. detected topics a
 ### Implementation
 The aforementioned approach is implemented as a method (topic_modeling(corpus, language) -> topics, common_words) in the analysis_nlp.py file.
 
-# Hate speech related entity collection
+## Hate speech related entity collection
 Topic modeling.
 
 # How to use

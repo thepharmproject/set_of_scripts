@@ -28,7 +28,7 @@ Progress
 ## Scraping & Data Collection
 
 ### Approach
-A method for detecting geolocation from text. geopy with nominatim geocoder are used. entities in the following ranking are preferred: GPE (countries, cities, states), LOC (mountains, bodies of water), FAC (buildings, airports, highways etc.), ORG (companies, agancies, institutions etc.).
+A method for detecting geolocation from text. Much emphasis was given in data gathering and formulation, as we think this is a prerequisite for seamlessly moving on the other tasks.A draft/prototype JSON-like data format with a simplified description scheme (source, title, text, metadata) has been formed, towards a unified description scheme for all sources (with an NoSQL approach, as the proposal specifies). This format is being used for storing content from websites (articles and comments), tweets and YouTube comments (for the case of twitter the description scheme is more complex). As for the websites, much effort was put on scraping "difficult" websites (i.e., when JavaScript is used for article/comments loading). All implementations have been refined to be more robust, accurate, providing data fully compatible with the doccano platform. Data format is compatible with the doccano platform. 
 
 ### Implementation
 The aforementioned approach is coded in couple of python files. In specific scraper_twitter.py, scraper_web.py, scraper_youtube.py, single_facebook.py, single_web.py and single_youtube.py files implement the necessary routines for collecting text content from the web.

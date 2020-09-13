@@ -170,7 +170,8 @@ SET THIS PARAMETER FOR GATHERING TWEETS VIA THE TWITTER API USING THE STREAM FUN
 [TWITTER-STREAM]="el"
 
 ### [YOUTUBE-SEARCH] & [YOUTUBE-SEARCH-NRESULTS]
-Set this parameter for collecting YouTube comments via the Google API.  Please set keywords for searching content, e.g. "migration refugees". Results are stored to "Data/scraper_youtube_data.json". Comment the following parameter if you do not want to use this method.
+Set this parameter for collecting YouTube comments via the Google API.  Please set keywords for searching content, e.g. "migration refugees". Results are stored to "Data/scraper_youtube_data.json". Comment the following parameter if you do not want to use this method.  
+  
 [YOUTUBE-SEARCH]="μετανάστες"  
 [YOUTUBE-SEARCH-NRESULTS]="200"
 

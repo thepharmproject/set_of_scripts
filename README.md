@@ -170,8 +170,8 @@ Set these parameters for collecting YouTube comments via the Google API. Use the
 Set this parameter for collecting texts from a single webpage. Simply set the URL of the webpage. The URL can point to an open Facebook Group or Page, a YouTube video or any other website. Results are stored to "Data/single_facebook_data.json", "Data/single_youtube_data.json" and  "Data/single_web_data.json" respectively. Data management is semi-structured for the Facebook and YouTube platfors, whereas is unstructured for the rest of the webpages. Comment out the following lines to skip this type of data collection.
   
 [WEBSITE-SINGLE]="https://www.facebook.com/groups/8080169598"  
-[WEBSITE-SINGLE]="https://www.facebook.com/playcompass"
-[WEBSITE-SINGLE]="https://www.youtube.com/watch?v=fDWFVI8PQOI"
+[WEBSITE-SINGLE]="https://www.facebook.com/playcompass"  
+[WEBSITE-SINGLE]="https://www.youtube.com/watch?v=fDWFVI8PQOI"  
 [WEBSITE-SINGLE]="https://bit.ly/33b7jLZ"
 
 ### [WEBSITE-MASS] & [WEBSITE-MASS-CYCLES]
@@ -184,5 +184,3 @@ Set these two parameters for collecting articles and comments from the supported
 Set this parameter for executing the data analyses procedures, acoording to the project's requirements, such as topic modeling, language detection, geolocation estimation, daterime parsing, hate speech detection etc. These analyses will be refined and updated with new functions, according to the project's timeline. The analyses can be applied to the data that is collected and stored in the "Data" directory. Use the following parameter to point to a specific file. Once the script finishes, a new file with the same name as the original and with the "_processed" suffix will be generated. Derived data can be used for manual annotation (for hate speech), or, generally, for developing a "hate speech" corpus.
 
 [ANALYZE-DATA]="Data\\scraper_web\\*vimaorthodoxias*_data.json"
-
-

@@ -3,6 +3,7 @@ Set of scripts of algorithms - The algorithm’s scripts will be made available 
 
 ## Sources Selection
 
+Several sources have been selected for the collection of content related to hate speech. The sources include articles and comments from a list of specific Spanish, Italian and Greek websites that was formed by the three participating teams.
 * semi structured
 - 22 spanish websites
 12 italian websites

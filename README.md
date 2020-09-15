@@ -3,8 +3,8 @@ Set of scripts of algorithms - The algorithm’s scripts will be made available 
 
 ## Sources Selection
 
-Several sources have been selected for the collection of content related to hate speech. The sources include articles and comments from a list of specific Spanish, Italian and Greek websites, twitter, youtube and facebook comments. The website list includes 22 Spanish, 12 Italian and 16 Greek websites that are prone to publishing hate speech content in the articles or in the comments section. The list of websites and Facebook pages was initialized and updated by the media experts of the three participating universities. Site-specific scraping scripts have been developed for the collection of semi-structured content (includeing accompanying metadata) from the proposed websites. Websites that are not included in the list can be supported using the site-agnostic scraping script. Tweets are gathered using a list of hashtags and filters containing terms relevant to anti-immigration rhetoric. Youtube comments are gathered using search queries relevant to immigration.
-A spreadsheet in Google Docs (https://bit.ly/3jaWzEq) for adding sources of interest have been deployed. Each sheet refers to the country of interest (i.e. International, Spanish, Greek, Italian). The selected sources (websites, keywords, search terms, facebook pages etc.) for each platform are included in the current version of the spreadsheet.
+Several sources have been selected for the collection of content related to hate speech. The sources include articles and comments from a list of specific Spanish, Italian and Greek websites, as well as twitter, youtube and facebook comments. The websites list includes 22 Spanish, 12 Italian and 16 Greek websites that are prone to publishing hate speech content in the articles or in the comments section. The list of websites and Facebook pages was initialized and updated by the media experts of the three participating universities. Site-specific scraping scripts have been developed for the collection of semi-structured content (including accompanying metadata) from the proposed websites. Websites that are not included in the list can be supported using the site-agnostic scraping script. Tweets are gathered using a list of hashtags and filters containing terms relevant to anti-immigration rhetoric. Youtube comments are collected using search queries relevant to immigration.
+A spreadsheet in Google Docs (https://bit.ly/3jaWzEq) for adding sources of interest has been deployed. Each sheet refers to the country of interest (i.e. International, Spanish, Greek, Italian). The selected sources (websites, keywords, search terms, facebook pages etc.) for each platform are included in the current version of the spreadsheet.
 
 
 
@@ -15,25 +15,25 @@ A multi-source platform for analysis of unstructured news and social media messa
 The existence of any public or private application program interface (API) to collect media data was in high priority. Hence, Twitter API and Google API are exploited for collecting data from the Twitter and YouTube platforms, BeautifulSoup and selenium for scraping texts from web pages and automating web browser interaction via the Python programming language. Semi-structured scrapers for over 50 websites (in English, Greek, Italian and Spanish) have been developed for collecting data massively, whereas routines for gathering data from Facebook groups and pages, YouTube videos and any other website have been also implemented. A prototype JSON-like data format with a simplified description scheme (source, title, text, meta-data) has been formed, towards a unified approach for all sources (with an NoSQL approach). This format is used for storing content from websites (articles and comments), tweets and YouTube comments (for the case of twitter and YouTube the description scheme is more complex). As for the websites, much effort was put on scraping targeted websites (i.e. when DISQUS or/and Facebook users' comments are present). All implementations have been refined to be more robust, accurate, being fully compatible with the doccano (https://github.com/doccano) platform for manual annotation. 
 
 ### Implementation
-This approach is coded in couple of python files. In specific, scraper_twitter.py, scraper_web.py, scraper_youtube.py, single_facebook.py, single_web.py and single_youtube.py files implement the necessary routines for collecting the content.
+This approach required coding a couple of python files. In specific, scraper_twitter.py, scraper_web.py, scraper_youtube.py, single_facebook.py, single_web.py and single_youtube.py files implement the necessary routines for collecting the content.
 
 #### Twitter tweets via streaming (Twitter API)
 The project supports text collection from the twitter via the appropriate API and the stream method. Tweepy is used for accessing the Twitter API. Four dictionaries for filtering tweets have been developed including Greek, English, Spanish and Italian keywords. These can been found in the "Keywords" directory. Results are stored to the "Data/scraper_twitter_data.json" file.
 
 #### Comments from YouTube videos via searching (Google API)
-YouTube comment collection is supported via the Google API. A search query should be specified for searching content (e.g. "migration refugees") and the comments from the top results (videos) are collected. Results are stored to the "Data/scraper_youtube_data.json" file.
+YouTube comment collection is supported via the Google API. A search query relevant to the topic (e.g. "migration refugees") is required from the user and the comments from the top results (videos) are collected. Results are stored to the "Data/scraper_youtube_data.json" file.
 
 #### Posts and replies from open Facebook groups and pages
-The selenium and BeautifulSoup packages are used to gather content from open Facebook groups and pages. A single URL should be specified. Results are stored to the "Data/single_facebook_data.json" file.
+The selenium and BeautifulSoup packages are used to gather content from open Facebook groups and pages. A single URL has to be specified. Results are stored to the "Data/single_facebook_data.json" file.
 
 #### Comments from YouTube videos
 The selenium and BeautifulSoup packages are used to gather content from a single YouTube video. The corresponding URL should be specified. Results are stored to the "Data/single_youtube_data.json" file.
 
 #### Articles and comments from monitored websites
-The selenium+BeautifulSoup duet is exploited once again. For the monitored websites a structured approach is followed. Articles, users' comments, meta-data are recognized and organized based on the selected description scheme. Results are stored to the "Data/scraper_web/" directory.
+The selenium and BeautifulSoup duet is exploited in this case as well. For the monitored websites, a structured approach is followed. Articles, users' comments, and meta-data are recognized and organized based on the selected description scheme. Results are stored to the "Data/scraper_web/" directory.
 
 #### Unstructured text data from any website
-This method can be used to collect texts from single web-pages. Results are stored to the "Data/single_web_data.json" file. Data via this method is unstructured.
+This method can be used to collect texts from single web-pages. Results are stored to the "Data/single_web_data.json" file. Data that is collected using this method is unstructured.
 
 ### Methods/Packages Evaluated
 Package | Pros | Cons | Links
@@ -44,10 +44,10 @@ tweepy | Easy to use | Compatibility issues between versions | https://pypi.org/
 Google API Client | Officially supported by Google | - | https://pypi.org/project/google-api-python-client/ <br> https://anaconda.org/conda-forge/google-api-python-client 
 
 ## Datetime Estimation
-A method for detecting and standardizing datetime information from metadata and text has been implemented. Besides location and language, when metadata is available, PHARM might use some relevant extra information for hate speech analysis. Some of this extra information, such as date or time, might be available in all cases, but with different formats, which means the necessity of standardization. 
+A method for detecting and standardizing datetime information from metadata and text has been implemented. Besides location and language, when metadata is available, PHARM might use some relevant extra information for hate speech analysis. Some of this extra information, such as date or time, might be available in most cases in several different formats. This introduces the necessity of standardization. 
 
 ### Approach
-For the needs of this requirement, dateparser, datefinder and parsedatetime python packages are exploited, ranked by higher accuracy to higher probability of returning a result. If the most accurate method fails to detect a datetime object, the next service is called. Detection is based in metadata, where date date information is commonly present. if datetime detection fails for all services for the metadata, the same workflow is applied to the text data.
+For the needs of this requirement, dateparser, datefinder and parsedatetime python packages are exploited, ranked by higher accuracy to higher probability of returning a result. If the most accurate method fails to detect a datetime object, the next service is called. Detection is based on metadata analysis, where date information is commonly present. If datetime detection fails for all services for the metadata, the same workflow is applied to the text data.
 
 ### Implementation
 The aforementioned approach is implemented as a method (detect_datetime(text, metadata, language) -> datetime) in the analysis_nlp.py file.
@@ -93,7 +93,7 @@ langdetect | Accurate easy to use | None (so far) | https://pypi.org/project/lan
 
 
 ## Metadata Selection
-Taking into account the requirements of the project (i.e. PHARM might use some relevant extra information for hate speech analysis), the sources that will be used for gath-ering the relevant content (i.e. Website articles and comments, YouTube comments and Twitter tweets), interoperability and compatibility considerations for import-ing/exporting data to third party applications that may/should be exploited (i.e. docca-no platform for annotation), the following general specifications have been set:
+Taking into account the requirements of the project (i.e. PHARM might use some relevant extra information for hate speech analysis), the sources that will be used for gathering the relevant content (i.e. Website articles and comments, YouTube comments and Twitter tweets), interoperability and compatibility considerations for importing/exporting data to third party applications that may/should be exploited (i.e. doccano platform for annotation), the following general specifications have been set:
 
 Format	| JSON
 --------|------
@@ -106,7 +106,8 @@ Text |	payload
 The main/base data field is the text (content), accompanied by the id, annotations and meta fields. Meta field is a container, including all additional data. A fundamental/minimum set of metadata will be used for all platforms. These will be the Pharm ID (PID), the source URL, the title, author, date, tags and categories. These fields are more probable to be found for all records across different sources. The following figure gives a hierarchical view of the proposed data scheme.
 
 A custom identifier has been designed, serving as a compact and unique representation of each record retrieved. This numerical value is composed as a synthesis of 2 digits for identifying language, 2 digits for identifying source, 8 digits derived as a hash from the corresponding URL, and 4 digits for enumerating items with the same language.
-In the case of web scraping, metadata depends on the available metadata provided by each site and the site-specific structure. In the case of youtube and twitter comments, where the corresponding APIs are used, specific metadata have been selected and are collected along with the comment text.
+In the cases 
+of eb scraping, metadata depends on the available metadata provided by each site and the site-specific structure. In the case of youtube and twitter comments, where the corresponding APIs are used, specific metadata have been selected and are collected along with the comment text.
 
 |Youtube     |             |            |          |             |         |                   |           |             |      |
 |:----------:|-------------|------------|----------|-------------|---------|-------------------|-----------|-------------|------|

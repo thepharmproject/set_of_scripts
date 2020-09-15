@@ -3,30 +3,10 @@ Set of scripts of algorithms - The algorithm’s scripts will be made available 
 
 ## Sources Selection
 
-Several sources have been selected for the collection of content related to hate speech. The sources include articles and comments from a list of specific Spanish, Italian and Greek websites, twitter, youtube and facebook comments. 
+Several sources have been selected for the collection of content related to hate speech. The sources include articles and comments from a list of specific Spanish, Italian and Greek websites, twitter, youtube and facebook comments. The website list includes 22 Spanish, 12 Italian and 16 Greek websites that are prone to publishing hate speech content in the articles or in the comments section. The list of websites and Facebook pages was initialized and updated by the media experts of the three participating universities. Site-specific scraping scripts have been developed for the collection of semi-structured content (includeing accompanying metadata) from the proposed websites. Websites that are not included in the list can be supported using the site-agnostic scraping script. Tweets are gathered using a list of hashtags and filters containing terms relevant to anti-immigration rhetoric. Youtube comments are gathered using search queries relevant to immigration.
+A spreadsheet in Google Docs (https://bit.ly/3jaWzEq) for adding sources of interest have been deployed. Each sheet refers to the country of interest (i.e. International, Spanish, Greek, Italian). The selected sources (websites, keywords, search terms, facebook pages etc.) for each platform are included in the current version of the spreadsheet.
 
-The website list includes websites that are prone to publiching hate speech content in the articles or in the comments section. The lists of websites and Facebook pages were initialized and updated by the media experts of the three participating universities. Tweets are gathered using a list of hashtags and filters containing terms relevant to anti-immigration rhetoric. Youtube comments are gathered using search queries relevant to immigration.
-* semi structured
-- 22 spanish websites
-12 italian websites
-16 greek websites
 
-twitter api
-youtube api
-
-single facebook groups & pages
-single youtube videos
-
-*unstructured 
-any website
-
-• A spreadsheet in Google Docs (https://bit.ly/3jaWzEq) for adding sources of in-terest have been deployed. Each sheet refers to a country (i.e. International, Spanish, Greek, Italian).
-• Platforms that include relevant content (i.e. Twitter, YouTube) can be added and, if applicable, a specific source/channel for each type of platform. For exam-ple, there is no need to specify a source/user in Twitter, as the collection is ex-ecuted arbitrarily based on a keyword list (this will be discussed in the future).
-• An additional column (Notes) for adding our comments/notes on each entry is present, to discuss any difficulties/problems that may arise (e.g. some websites mostly have audiovisual content and very little text, or there is absence of comments).
-• An additional column with feedback, denoting also the current site's gathering status is also specified. If an "OK" note is present, then the scraper is already ca-pable of gathering data for the specific site.
-• As for the websites, much effort was put on scraping "difficult" websites (i.e., when JavaScript is used for article/comments loading). The implementation of a scraper has to be tuned for each website independently. This adaptive "scraping configuration" is generally a time-consuming process. Hence, if you want to add new entries to the online spreadsheet, precise/targeted additions are recom-mended. If comments are vital for our analysis, consider leaving out websites without/or will rare commenting. If a website is more probable to contain hate speech content, give it a higher priority than others.
-Progress
-• The list is a preliminary attempt to review the most important/popular sources for each region/language, so as to examine/evaluate the technical needs/difficulties for developing data scraping algorithms for each individual website/platform. It is probable that some entries will not be includ-ed/implemented, so consider adding the most representa-tive/popular/interesting sources at this step.
 
 ## Scraping & Data Collection
 A multi-source platform for analysis of unstructured news and social media messages has been developed. It is important that chosen sources are valid and reliable to detect hate speech against refugees and migrants. In addition to this, hate speech data should include data (texts of the news or social media messages) and meta-data (location, language, date, etc.). For this reason, different types of sources (websites and social platforms) have been chosen and the necessary technical implementations have been made to collect the necessary data from these sources. JSON (JavaScript Object Notation) is the preferred format for storing the data. JSON is an open standard, containing labels and contents as an attribute-value pair. One of the advantages of JSON is the flexibility to store different fields depending on the features and information available for each text. In order to store, query, analyze and share news and social media messages, PHARM adopts a semi-structured format based on JSON, adapted to media features. 

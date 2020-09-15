@@ -3,7 +3,9 @@ Set of scripts of algorithms - The algorithm’s scripts will be made available 
 
 ## Sources Selection
 
-Several sources have been selected for the collection of content related to hate speech. The sources include articles and comments from a list of specific Spanish, Italian and Greek websites that was formed by the three participating teams.
+Several sources have been selected for the collection of content related to hate speech. The sources include articles and comments from a list of specific Spanish, Italian and Greek websites, twitter, youtube and facebook comments. 
+
+The website list includes websites that are prone to publiching hate speech content in the articles or in the comments section. The lists of websites and Facebook pages were initialized and updated by the media experts of the three participating universities. Tweets are gathered using a list of hashtags and filters containing terms relevant to anti-immigration rhetoric. Youtube comments are gathered using search queries relevant to immigration.
 * semi structured
 - 22 spanish websites
 12 italian websites

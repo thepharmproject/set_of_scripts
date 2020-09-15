@@ -106,8 +106,7 @@ Text |	payload
 The main/base data field is the text (content), accompanied by the id, annotations and meta fields. Meta field is a container, including all additional data. A fundamental/minimum set of metadata will be used for all platforms. These will be the Pharm ID (PID), the source URL, the title, author, date, tags and categories. These fields are more probable to be found for all records across different sources. The following figure gives a hierarchical view of the proposed data scheme.
 
 A custom identifier has been designed, serving as a compact and unique representation of each record retrieved. This numerical value is composed as a synthesis of 2 digits for identifying language, 2 digits for identifying source, 8 digits derived as a hash from the corresponding URL, and 4 digits for enumerating items with the same language.
-In the cases 
-of eb scraping, metadata depends on the available metadata provided by each site and the site-specific structure. In the case of youtube and twitter comments, where the corresponding APIs are used, specific metadata have been selected and are collected along with the comment text.
+In the cases of web scraping, metadata depends on the available metadata provided by each site and the site-specific structure. In the case of youtube and twitter comments, where the corresponding APIs are used, specific metadata have been selected and are collected along with the comment text.
 
 |Youtube     |             |            |          |             |         |                   |           |             |      |
 |:----------:|-------------|------------|----------|-------------|---------|-------------------|-----------|-------------|------|
@@ -118,7 +117,7 @@ of eb scraping, metadata depends on the available metadata provided by each site
 A couple of methods for finding key terms for hate speech detection have been implemented. These include simple string matching, approximate string matching with the use of the appropriate metrics, such as Levenshtein Distance, Damerau-Levenshtein Distance, Jaro Distance, Jaro-Winkler Distance, Match Rating Approach Comparison, Hamming Distance. Term matching also aims at being suffix agnostic, accommodating the various suffixes that may exist in nouns for many languages (i.e. Greek language features different suffixes for gender or singular/plural versions). A word-vector approach has also been developed, taking into account the semantic meaning of the terms. A hybrid dictionary-based approach with predefined phrases, along with dynamic term combinations (i.e. adjectives combined with nouns) has been implemented and is under evaluation.
 
 ### Approach
-Two modes can be used for filtering (mode=0,1,2). The first one is based in a dictionary of terms for four different languages: English, Greek, Italian and Spanish. A language model is loaded (according to the language of the text), common practices are followed (lowercasing, lemmatization, stop word and punctuation removal), and the targeted terms are being searched in the text. If a term (or combination of terms) is found, text segments are denoted as "hate speech". The second one is based in word vectors allowing for a more semantic detection. The same workflow is followed for this method as well (lemmatization etc.). if mode is set to "2" the union of the results from both methods is returned.
+Two modes can be used for filtering (mode=0,1,2). The first one is based in a dictionary of terms for four different languages: English, Greek, Italian and Spanish. A language model is loaded (according to the language of the text), common practices are followed (lowercasing, lemmatization, stop-words and punctuation removal), and the targeted terms are being searched in the text. If a term (or combination of terms) is found, text segments are denoted as "hate speech". The second one is based in word vectors allowing a more semantic detection. The same workflow is followed for this method as well (lemmatization etc.). If mode is set to "2" the union of the results from both methods is returned.
 
 ### Implementation
 The aforementioned approach is implemented as a method (detect_hate(text, metadata, language, mode) -> matches[]) in the analysis_nlp.py file.
@@ -131,7 +130,7 @@ spacy | Pretrained models (EN, ES, IT, EL), lots of linguistic features (part of
 ## Topic Modeling
 
 ### Approach
-A combined method tfid (term frequency–inverse document frequency) plus lda (latent dirichlet allocation) is deployed for topic modeling. Detected topics and most common terms are returned. A list of topics is created based on a corpus of text items.
+A combined method TFIDF (term frequency–inverse document frequency) with Non-negative Matrix  and LDA (Latent Dirichlet Allocation) is deployed for topic modeling. Detected topics and most common terms are returned. A list of topics is created based on a corpus of text items.
 
 ### Implementation
 The aforementioned approach is implemented as a method (topic_modeling(corpus[], language) -> topics[], words[]) in the analysis_nlp.py file.

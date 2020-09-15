@@ -110,7 +110,9 @@ A custom identifier has been designed, serving as a compact and unique represent
 |Youtube     |             |            |          |             |         |                   |           |             |      |
 |------------|-------------|------------|----------|-------------|---------|-------------------|-----------|-------------|------|
 | comment_id | reply_count | like_count | video_id | video_title | channel | video_description | author_id | author_name | date |
-
+|Twitter     |             |            |          |             |         |                   |           |             |      |
+|------------|-------------|------------|----------|-------------|---------|-------------------|-----------|-------------|------|
+| comment_id | reply_count | like_count | video_id | video_title | channel | video_description | author_id | author_name | date |
 ## Hate Speech Detection
 A couple of methods for finding key terms for hate speech detection have been implemented. These include simple string matching, approximate string matching with the use of the appropriate metrics, such as Levenshtein Distance, Damerau-Levenshtein Distance, Jaro Distance, Jaro-Winkler Distance, Match Rating Approach Comparison, Hamming Distance. Term matching also aims at being suffix agnostic, accommodating the various suffixes that may exist in nouns for many languages (i.e. Greek language features different suffixes for gender or singular/plural versions). A word-vector approach has also been developed, taking into account the semantic meaning of the terms. A hybrid dictionary-based approach with predefined phrases, along with dynamic term combinations (i.e. adjectives combined with nouns) has been implemented and is under evaluation.
 

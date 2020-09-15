@@ -107,8 +107,8 @@ The main/base data field is the text (content), accompanied by the id, annotatio
 
 A custom identifier has been designed, serving as a compact and unique representation of each record retrieved. This numerical value is composed as a synthesis of 2 digits for identifying language, 2 digits for identifying source, 8 digits derived as a hash from the corresponding URL, and 4 digits for enumerating items with the same language
 
-Youtube
-|-----|
+Youtube | | | | | | | | | |
+|------------|
 | comment_id | reply_count | like_count | video_id | video_title | channel | video_description | author_id | author_name | date |
 
 ## Hate Speech Detection

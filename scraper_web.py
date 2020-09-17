@@ -3,10 +3,10 @@
 
 ''' PYTHON SETUP '''
 # a list of the required packages is listed here based on anaconda setup commands.
+
 # conda install selenium
 # conda install beautifulsoup4
 # conda install -c conda-forge geckodriver
-# conda install -c conda-forge python-chromedriver-binary
 
 
 ''' LIBRARIES IMPORTED '''
@@ -104,7 +104,7 @@ def download(base_url, curr_url, cycles):
     # 21 ES - tradicionviva.es - Wordpress / Facebook
     if curr_url.find('tradicionviva.es') > 0:               es_tradicionviva_es.scrape(curr_url, hash, soup, results)
     # 22 ES - manos-limpias.es - Custom ASP
-    if curr_url.find('manos-limpias.es') > 0:               es_manos_limpias_es.scrape(curr_url, soup, results)
+    if curr_url.find('manos-limpias.es') > 0:               es_manos_limpias_es.scrape(curr_url, hash, soup, results)
     # 23 ES - laverdad.es - Custom / Custom
     if curr_url.find('laverdad.es') > 0:                    es_laverdad_es.scrape(curr_url, soup, results)
 
@@ -185,7 +185,7 @@ def download(base_url, curr_url, cycles):
     already = len(links)
     print('{:} links already listed...'.format(already))
 
-    #  Detect new and update listed links
+    # Detect new and update listed links
     for a in soup.find_all('a'):
         link = ''
         if a.has_attr('href'):
@@ -200,7 +200,7 @@ def download(base_url, curr_url, cycles):
         if (link not in links) and ('!'+link not in links) and (len(link) > 0) and (link.find('#') < 0) and (link.find('reply') < 0) and (link.find('png') < 0) and (link.find('jpg') < 0) and (link.find('pdf') < 0) and (link.find('zip') < 0):
             links.append(link)
 
-    # Some link stats
+    # Display some link stats
     visited = 0
     for l in links:
         if l.startswith('!'):
@@ -215,8 +215,9 @@ def download(base_url, curr_url, cycles):
 
     ''' FIND A DESTINATION '''
     print('{} cycles remaining...'.format(cycles))
+
+    # Find a new destination
     if cycles > 0:
-        #  Find a new destination
         destination = base_url
         while len(links) > 0:
             r = random.randint(0, len(links) - 1)
@@ -229,12 +230,13 @@ def download(base_url, curr_url, cycles):
                 print("Selected an already visited link. Retrying...")
         print('Going to {}\n'.format(destination[:min(100, len(destination))]))
 
-        # Update link list
-        file = open('Data\\scraper_web\\' + urlsplit(base_url).netloc + '_links.txt', 'w', encoding='utf-8')
+    # Update link list
+    with open('Data\\scraper_web\\' + urlsplit(base_url).netloc + '_links.txt', 'w', encoding='utf-8') as file:
+        #
         for link in links:  file.write(link + '\n')
-        file.close()
 
-        #  Go to the destination
+    #  Go to the new destination
+    if cycles > 0:
         time.sleep(1)
         cycles -= 1
         download(base_url, destination, cycles)

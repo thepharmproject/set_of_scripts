@@ -8,6 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 import utilities as utils
 import time, json
@@ -20,15 +21,19 @@ def scrape(curr_url, hash, soup, results):
     # load and manipulate the website
     with webdriver.Firefox(options=FirefoxOptions()) as driver:
 
-        # options.add_argument("--headless")
+        driver.maximize_window()
         driver.implicitly_wait(5)
+        ac = ActionChains(driver)
 
         # load the website
         try:
             driver.get(curr_url)
             time.sleep(5)
-            WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.ID, "info-text"))).click()
-            WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.TAG_NAME, "body"))).send_keys(Keys.DOWN)
+            # WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.ID, "info-text"))).click()
+            # WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.TAG_NAME, "body"))).send_keys(Keys.DOWN)
+            # for item in driver.find_elements_by_tag_name('body'):
+            #     ac.move_to_element(item).move_by_offset(5, 5).click().perform()
+            #     time.sleep(1)
             for item in range(10):
                 driver.find_element_by_tag_name('body').send_keys(Keys.DOWN)
                 time.sleep(1)

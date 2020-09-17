@@ -20,7 +20,7 @@ def scrape(curr_url, hash, soup, results):
     # load and manipulate the website
     with webdriver.Firefox(options=FirefoxOptions()) as driver:
 
-        # options.add_argument("--headless")
+        driver.maximize_window()
         driver.implicitly_wait(5)
 
         # load the website
@@ -68,7 +68,7 @@ def scrape(curr_url, hash, soup, results):
         dm["source"] = curr_url
 
         dt["meta"] = dm
-        dt["text"] = utils.clean_soup(c)
+        dt["text"] = utils.clean_soup(t)
 
         result = json.dumps(dt, ensure_ascii=False)
         results.append(result)
@@ -92,7 +92,7 @@ def scrape(curr_url, hash, soup, results):
         print(result)
 
     # parse comments (new facebook)
-    for t in BeautifulSoup(content, "html.parser").find_all('span', class_='ecm0bbzt e5nlhep0 a8c37x1j'):
+    for t in BeautifulSoup(content, "html.parser").find_all('div', class_='ecm0bbzt e5nlhep0 a8c37x1j'):
 
         dt = {}
         dm = {}

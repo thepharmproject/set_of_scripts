@@ -56,7 +56,7 @@ The aforementioned approach is implemented as a method (detect_datetime(text, me
 Package | Pros | Cons | Links
 --------|------|------|-----
 dateparser | Relatively high accuracy | Limited estimations | https://pypi.org/project/dateparser/ <br> https://anaconda.org/conda-forge/dateparser
-datefinder | Lower accuracy | Returns a list of estimations | https://pypi.org/project/datefinder/ <br> https://pypi.org/project/datefinder/
+datefinder | Lower accuracy | Returns a list of estimations | https://pypi.org/project/datefinder/ <br> https://anaconda.org/conda-forge/datefinder
 parsedatetime | Baseline method | Datetime scheme should be defined | https://pypi.org/project/parsedatetime/ <br> https://anaconda.org/conda-forge/parsedatetime
 
 ## Geolocation Estimation
@@ -150,13 +150,13 @@ Set this parameter to collect tweets via Twitter's stream function. Set the para
 [TWITTER-STREAM]="el"
 
 ### [YOUTUBE-SEARCH] & [YOUTUBE-SEARCH-NRESULTS]
-Set these parameters for collecting YouTube comments via the Google API. Use the [YOUTUBE-SEARCH] parameter to set the keywords for searching content, e.g. "migration refugees" and the [YOUTUBE-SEARCH-NRESULTS] parameter to regulate the number of returned results. Results are stored to "Data/scraper_youtube_data.json". Comment the following lines if you do not want to use this method.  
+Use these parameters for collecting YouTube comments via the Google API. Set the [YOUTUBE-SEARCH] parameter to define the keywords for searching content, e.g. "migration refugees" and the [YOUTUBE-SEARCH-NRESULTS] parameter to regulate the number of returned results. Results are stored to "Data/scraper_youtube_data.json". Comment the following lines for ignoring this method.
   
 [YOUTUBE-SEARCH]="μετανάστες"  
 [YOUTUBE-SEARCH-NRESULTS]="200"
 
 ### [WEBSITE-SINGLE]
-Set this parameter for collecting texts from a single webpage. Simply set the URL of the webpage. The URL can point to an open Facebook Group or Page, a YouTube video or any other website. Results are stored to "Data/single_facebook_data.json", "Data/single_youtube_data.json" and  "Data/single_web_data.json" respectively. Data management is semi-structured for the Facebook and YouTube platfors, whereas is unstructured for the rest of the webpages. Comment out the following lines to skip this type of data collection.
+Use this parameter for collecting texts from a single webpage. Simply set the URL of the webpage. The URL can point to an open Facebook Group or Page, a YouTube video or any other website. Results are stored to "Data/single_facebook_data.json", "Data/single_youtube_data.json" and  "Data/single_web_data.json" respectively. Data management is semi-structured for the Facebook and YouTube platforms, whereas is unstructured for the rest of the webpages. Comment out the following lines to skip this type of data collection.
   
 [WEBSITE-SINGLE]="https://www.facebook.com/groups/8080169598"  
 [WEBSITE-SINGLE]="https://www.facebook.com/playcompass"  
@@ -164,12 +164,12 @@ Set this parameter for collecting texts from a single webpage. Simply set the UR
 [WEBSITE-SINGLE]="https://bit.ly/33b7jLZ"
 
 ### [WEBSITE-MASS] & [WEBSITE-MASS-CYCLES]
-Set these two parameters for collecting articles and comments from the supported websites for structured scraping. The list of the supported websites is stored in the "Config/websites.txt" file. Make use of the [WEBSITE-MASS] and [WEBSITE-MASS-CYCLES] to set the URL and to define the number of scans/cycles the spider will perform to the site, respectively. The algorithm automatically discovers  different pages/articles within the site, keeps a list of already visited hyperlinks, stores content and continues to a new unvisited destination. Results are stored to seperate, according the name of the site, files in the "Data/scraper_web/" directory. Comment out the following lines for skipping this type of data collection. 
+Set these two parameters for collecting articles and comments from the supported websites for structured scraping. The list of the supported websites is stored in the "Config/websites.txt" file. Make use of the [WEBSITE-MASS] and [WEBSITE-MASS-CYCLES] to set the URL and define the number of scans cycles the spider will perform to the site. The algorithm automatically discovers the various pages/articles within the site, keeps a list of the already visited hyperlinks, stores content and moves on to new unvisited destinations. Results are stored to separate, according the name of the site, files in the "Data/scraper_web/" directory. Comment out the following lines for skipping this type of data collection.
    
 [WEBSITE-MASS]="http://www.voxespana.es"  
 [WEBSITE-MASS-CYCLES]="100"
 
 ### [ANALYZE-DATA]
-Set this parameter for executing the data analyses procedures, acoording to the project's requirements, such as topic modeling, language detection, geolocation estimation, daterime parsing, hate speech detection etc. These analyses will be refined and updated with new functions, according to the project's timeline. The analyses can be applied to the data that is collected and stored in the "Data" directory. Use the following parameter to point to a specific file. Once the script finishes, a new file with the same name as the original and with the "_processed" suffix will be generated. Derived data can be used for manual annotation (for hate speech), or, generally, for developing a "hate speech" corpus.
+Set this parameter for executing the data analyses methods, acoording to the project's requirements, such as topic modeling, language detection, geolocation estimation, datetime parsing, hate speech detection etc. These methods will be refined and updated with new functions, according to the project's timeline. The analyses can be applied to the data that is collected and stored in the "Data" directory. Use the following parameter to point to a specific file/s. Once code execution is finished, a new file with the same name as the original plus the "_processed" suffix will be generated. Derived data can be used for manual annotation, or, generally, for developing a "hate speech" corpus. Comment out the following line for skipping the data analysis procedure. 
 
 [ANALYZE-DATA]="Data\\scraper_web\\*vimaorthodoxias*_data.json"

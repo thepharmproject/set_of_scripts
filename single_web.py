@@ -20,7 +20,7 @@ def scrape(curr_url, hash, soup, results):
     # load and manipulate the website
     with webdriver.Firefox(options=FirefoxOptions()) as driver:
 
-        # options.add_argument("--headless")
+        driver.maximize_window()
         driver.implicitly_wait(5)
 
         # load the website

@@ -22,14 +22,42 @@ def clean_whitespaces(text):
     return t
 
 def clean_accent(text):
+
     t = text
+
+    # el
+    t = t.replace('Ά', 'Α')
+    t = t.replace('Έ', 'Ε')
+    t = t.replace('Ί', 'Ι')
+    t = t.replace('Ή', 'Η')
+    t = t.replace('Ύ', 'Υ')
+    t = t.replace('Ό', 'Ο')
+    t = t.replace('Ώ', 'Ω')
     t = t.replace('ά', 'α')
     t = t.replace('έ', 'ε')
     t = t.replace('ί', 'ι')
     t = t.replace('ή', 'η')
+    t = t.replace('ύ', 'υ')
     t = t.replace('ό', 'ο')
     t = t.replace('ώ', 'ω')
-    t = t.replace('ύ', 'υ')
+    t = t.replace('ς', 'σ')
+
+    # es
+    t = t.replace('Á', 'A')
+    t = t.replace('É', 'E')
+    t = t.replace('Í', 'I')
+    t = t.replace('Ñ', 'N')
+    t = t.replace('Ó', 'O')
+    t = t.replace('Ú', 'U')
+    t = t.replace('Ü', 'U')
+    t = t.replace('á', 'a')
+    t = t.replace('é', 'e')
+    t = t.replace('í', 'i')
+    t = t.replace('ñ', 'n')
+    t = t.replace('ó', 'o')
+    t = t.replace('ú', 'u')
+    t = t.replace('ü', 'u')
+
     return t
 
 def correct_unicode():

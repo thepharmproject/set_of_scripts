@@ -1,6 +1,6 @@
 ''' Setup '''
-# conda create --name NLP python=3.7
-# conda activate NLP
+# a list of the required packages is listed here based on anaconda setup commands.
+
 # conda install -c conda-forge tweepy
 
 ''' Libraries '''

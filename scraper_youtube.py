@@ -1,4 +1,6 @@
 ''' Setup '''
+# a list of the required packages is listed here based on anaconda setup commands.
+
 #  conda install -c conda-forge google-api-python-client
 #  conda install -c conda-forge google-auth-oauthlib
 

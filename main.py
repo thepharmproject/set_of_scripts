@@ -18,33 +18,9 @@ import single
 
 
 ''' EXTERNAL CONFIGURATION | DATA & METADATA COLLECTION (T2.1) & (T2.5) | CORPUS DEVELOPMENT (T2.9) '''
+# ******************************************************************************************
 # the following code lines assist in reading the main configuration file ("Config/main.txt").
-# the processes that can be initialized are related to semi-structured (text) web scraping
-# and text analyses. in specific:
-# [TWITTER-STREAM] parameter invokes the routine for collecting tweets from twitter.
-# "scraper_twitter.py" implements this specific routine
-# the specified parameter can be "EL", "EN", "ES", "IT", exploiting the appropriate dictionary
-# with terms for filtering tweets via the twitter stream method. the results are stored to
-# "Data/scraper_twitter.json" file. the twitter api is used.
-# [YOUTUBE-SEARCH] parameter invokes the routine for collecting video comments from youtube.
-# "scraper_youtube.py" implements this routine. the corresponding argument should be a keyword
-# (or list of keywords separated by spaces) for executing the search procedure. the results
-# are stored to "Data/scraper_youtube.json" file. the google api is used.
-# [WEBSITE-SINGLE] parameter invokes the routine for collecting posts from facebook groups,
-# youtube videos and websites. data from facebook and youtube is structured, whereas for the
-# websites is unstructured. "single_facebook.py", "single_youtube.py" and "single_web.py"
-# implement the required routines. data are stored to "Data/single_facebook_data.json",
-# "Data/single_youtube_data.json" and "Data/single_web_data.json" files. you should set the
-# url of the website to by scraped as argument.
-# [WEBSITE-MASS] parameter invokes the routine for collecting video comments from youtube.
-# "scraper_web.py" implements this specific routine and all py files under the "Scrapers"
-# dictionary
-# the corresponding argument can be a keyword (or list of keywords separeted by spaces) for
-# executing a search procedure. the
-# [ANALYZE-DATA] parameter invokes the routine for collecting video comments from youtube.
-# "scraper_youtube.py" implements this specific routine.
-# the corresponding argument can be a keyword (or list of keywords separeted by spaces) for
-# executing a search procedure. the
+# the processes that can be initialized are related to web scraping and text analyses.
 def start():
 
     print('\nScript started...\n')
@@ -83,6 +59,7 @@ def start():
                 print("Initializing data analysis with parameter:", par1)
                 analyze_data(par1)
             elif line.find("[TEST-FUNCTIONS]") == 0:
+                par1 = ''
                 print("Initializing data testing")
                 test()
 
@@ -95,11 +72,12 @@ def start():
 
 
 ''' HATE SPEECH DETECTION (T2.2) | GEOLOCATION ESTIMATION (T2.3) | LANGUAGE DETECTION (T2.4) | ENTITY COLLECTION (T2.7) | SENTIMENT ANALYSIS (T2.8) '''
+# ******************************************************************************************
 # this helper function assists the initialization of the implemented text analyses methods.
 # data that is stored in JSON format ("Data" directory) is read and routed (as arguments) to
-# the analysis methods that are implemented in the analysis_nlp.py file. the corresponding results
-# are returned. these results will be stored in separate data files (*_processed.json) in the future
-# to be routed for annotation and database storing.
+# the analysis methods that are implemented in the analysis_nlp.py file. the corresponding
+# results are returned. these results will be stored in separate data files (*_processed.json)
+# in the future to be routed for annotation and database storing.
 def analyze_data(path, type='all', lang_ana=True, date_ana=True, hate_ana=True, term_ana=True, loc_ana=True, topic_ana=True, ent_ana=True):
 
     # read all files from path
@@ -169,67 +147,7 @@ def analyze_data(path, type='all', lang_ana=True, date_ana=True, hate_ana=True, 
 
 
 ''' SUPPLEMENTARY METHODS FOR DEVELOPMENT & TESTING '''
-def test(sample_size=100):
-
-    # results
-    cor = 0
-    all = 0
-    y_true = []
-    y_pred = []
-
-    # read hate speech data
-    print(' ')
-    print('analyzing hate speech data')
-    try:
-        with open('Datasets/hate_migrants_sampled.txt', 'r', encoding='utf-8-sig') as file:
-            samples = file.read().splitlines()
-    except:
-        with open('Datasets/hate_migrants.txt', 'r', encoding='utf-8-sig') as file:
-            data = file.read().splitlines()
-        samples = random.choices(data, k=int(sample_size/2))
-        print('writing sampled hate speech data')
-        with open('Datasets/hate_migrants_sampled.txt', 'w', encoding='utf-8-sig') as file:
-            for datum in samples:  file.write(datum + '\n')
-
-    # analyze hate speech data
-    for datum in samples:
-        lang = an.detect_language(datum)
-        hate = an.detect_hate_fast(datum, None, lang)
-        if len(hate) > 0:   y_pred.append(1)
-        else:               y_pred.append(0)
-        y_true.append(1)
-        if len(hate) >= 1:   cor = cor + 1
-        all = all + 1
-
-    # read no hate speech data
-    print(' ')
-    print('analyzing no hate speech data')
-    try:
-        with open('Datasets/no_hate_migrants_sampled.txt', 'r', encoding='utf-8-sig') as file:
-            samples = file.read().splitlines()
-    except:
-        with open('Datasets/no_hate_migrants.txt', 'r', encoding='utf-8-sig') as file:
-            data = file.read().splitlines()
-        samples = random.choices(data, k=int(sample_size / 2))
-        print('writing sampled no hate speech data')
-        with open('Datasets/no_hate_migrants_sampled.txt', 'w', encoding='utf-8-sig') as file:
-            for datum in samples:  file.write(datum + '\n')
-
-    # analyze no hate speech data
-    for datum in samples:
-        lang = an.detect_language(datum)
-        hate = an.detect_hate_fast(datum, None, lang)
-        if len(hate) > 0:   y_pred.append(1)
-        else:               y_pred.append(0)
-        y_true.append(0)
-        if len(hate) <= 0:  cor = cor + 1
-        all = all + 1
-
-    print(' ')
-    print('Classification report')
-    print(classification_report(y_true, y_pred, target_names=['No hate', 'Hate']))
-
-    print('Classification accuracy: {:.2}'.format(cor/all))
+# ******************************************************************************************
 # helper methods/scripts for testing/deploying implemented workdflows and analysis methods.
 # these are not for deployment, as they have been replaced by the external file configuration
 # initialization.
@@ -301,13 +219,72 @@ def test(sample_size=100):
 # single.download('https://twitter.com/Conclavios/status/1285176673214894080')                                      # twitter tweet
 # single.download('https://www.youtube.com/watch?v=fDWFVI8PQOI')                                                    # youtube comments
 # single.download('https://www.makeleio.gr/επικαιροτητα/Ο-υπουργός-παιδεραστής-και-η-αποκάλυ/')                     # website content
+def test(sample_size=10, reset=True):
+
+    # init vars
+    cor = 0
+    all = 0
+    y_true = []
+    y_pred = []
+
+    # clean sample files
+    if reset:
+        if os.path.exists('Datasets/hate_migrants_sampled.txt'):
+            os.remove('Datasets/hate_migrants_sampled.txt')
+        if os.path.exists('Datasets/no_hate_migrants_sampled.txt'):
+            os.remove('Datasets/no_hate_migrants_sampled.txt')
+
+    # read and analyze hate speech data
+    try:
+        with open('Datasets/hate_migrants_sampled.txt', 'r', encoding='utf-8-sig') as file:
+            samples = file.read().splitlines()
+    except:
+        with open('Datasets/hate_migrants.txt', 'r', encoding='utf-8-sig') as file:
+            data = file.read().splitlines()
+        samples = random.choices(data, k=int(sample_size/2))
+        print('writing sampled hate speech data')
+        with open('Datasets/hate_migrants_sampled.txt', 'w', encoding='utf-8-sig') as file:
+            for datum in samples:  file.write(datum + '\n')
+    print('\nanalyzing hate speech data with {} samples'.format(len(samples)))
+    for datum in samples:
+        print('\nAnalyzing item {}/{} with text {}'.format(all+1, len(samples), datum[:120]))
+        lang = an.detect_language(datum)
+        hate = an.detect_hate_fast(datum, None, lang)
+        if len(hate) > 0:   y_pred.append(1)
+        else:               y_pred.append(0)
+        y_true.append(1)
+        if len(hate) >= 1:   cor = cor + 1
+        all = all + 1
+
+    # read and analyze no hate speech data
+    try:
+        with open('Datasets/no_hate_migrants_sampled.txt', 'r', encoding='utf-8-sig') as file:
+            samples = file.read().splitlines()
+    except:
+        with open('Datasets/no_hate_migrants.txt', 'r', encoding='utf-8-sig') as file:
+            data = file.read().splitlines()
+        samples = random.choices(data, k=int(sample_size / 2))
+        print('writing sampled no hate speech data')
+        with open('Datasets/no_hate_migrants_sampled.txt', 'w', encoding='utf-8-sig') as file:
+            for datum in samples:  file.write(datum + '\n')
+    print('\nanalyzing no hate speech data with {} samples'.format(len(samples)))
+    for datum in samples:
+        print('\nAnalyzing item {}/{} with text {}'.format(all + 1, len(samples), datum[:120]))
+        lang = an.detect_language(datum)
+        hate = an.detect_hate_fast(datum, None, lang)
+        if len(hate) > 0:   y_pred.append(1)
+        else:               y_pred.append(0)
+        y_true.append(0)
+        if len(hate) <= 0:  cor = cor + 1
+        all = all + 1
+
+    # present results
+    print('\nClassification report')
+    print(classification_report(y_true, y_pred, target_names=['No hate', 'Hate']))
+    print('Classification accuracy: {:.2}'.format(cor/all))
 
 
 ''' STARTING POINT OF THE SCRIPT '''
 # the following line invokes the main method for running all available processing flows
 # of the project
 start()
-
-
-
-

@@ -1,4 +1,4 @@
-''' This python file implements various nlp analysis methods '''
+''' This python file includes various nlp analysis methods '''
 
 
 ''' PYTHON SETUP '''
@@ -52,9 +52,10 @@ import utilities as utils
 
 
 ''' ANALYSIS METHODS '''
-# detect language from text. a chained approach is adopted for improved robustness.
-# textblob, google translate and langdetect services are used. if a service fails
-# the result form the next one is requested.
+# ******************************************************************************************
+# detect language from text. a recursive approach is adopted for improved robustness.
+# textblob, google translate and langdetect services are used. if a service fails the result
+# form the next one is requested.
 def detect_language(text):
     print('* language detection')
 
@@ -78,12 +79,13 @@ def detect_language(text):
     if lang is None: print('\tlanguage detection failed...')
     return lang
 
-# detect datetime from metadata and text. a chained approach is adopted here as well.
-# dateparser, datefinder and parsedatetime packages are exploited ranked from higher
-# accuracy to higher probability of returning a result. if the most accurate fails to
-# detect the datetime object, the next service is called and so on. detection is based
-# in metadata, where date date information is commonly present. if datetime detection
-# fails for all services in metadata, the same workflow is applied to text data.
+# ******************************************************************************************
+# detect datetime from metadata and text. a recursive approach is adopted here as well.
+# dateparser, datefinder and parsedatetime packages are exploited ranked from higher accuracy
+# to higher probability of returning a result. if the most accurate fails to detect the
+# datetime object, the next service is called and so on. detection is based on metadata,
+# where date date information is commonly present. if datetime detection fails for all
+# services in metadata, the same workflow is applied to text data.
 def detect_datetime(text, meta, lang):
 
     print('* datetime detection')
@@ -137,16 +139,16 @@ def detect_datetime(text, meta, lang):
 
     return results[0]
 
-# detect hate speech in text. three approaches are implemented (mode='strings', '
-# lemmas', 'vectors','both'). the first one is based in a dictionary of terms for
-# four different languages, english, greek, italian and spanish. a language model
-# is loaded (according to the language of the text), common practices are followed
-# (lowercasing, lemmatization, stop word and punctuation removal), and the targeted
-# terms are being searched in the text. if found, text segments are denoted as
-# "hate speech". the second one is based in word vectors allowing for a more
-# semantic detection. the same workflow is followed for this method as well
-# (lemmatization etc.). if mode is set to "both" the union of the results from
-# both methods is returned.
+# ******************************************************************************************
+# detect hate speech in text. three approaches are implemented (mode='strings', 'lemmas',
+# 'vectors','both'). the first one is based in a dictionary of terms for four different
+# languages, english, greek, italian and spanish. a language model is loaded (according to
+# the language of the text), common practices are followed (lowercasing, lemmatization, stop
+# word and punctuation removal), and the targeted terms are being searched in the text. if
+# found, text segments are denoted as "hate speech". the second one is based in word vectors
+# allowing for a more semantic detection. the same workflow is followed for this method as
+# well (lemmatization etc.). if mode is set to "both" the union of the results from all
+# methods is returned.
 def detect_hate(text, meta, lang, mode='strings'):
 
     print('* hate speech detection with mode \'{}\''.format(mode))
@@ -264,8 +266,8 @@ def detect_hate(text, meta, lang, mode='strings'):
 
     return results_txt
 
-# a faster implementation of the dictionary-based
-# hate speech detection
+# ******************************************************************************************
+# a faster implementation of the aforementioned hate speech detection.
 def detect_hate_fast(text, meta, lang, mode='strings'):
 
     print('* hate speech detection with mode \'{}\''.format(mode))
@@ -296,7 +298,7 @@ def detect_hate_fast(text, meta, lang, mode='strings'):
     matches = []
     words_token = nlp(text)
     dict_pos = 0
-    for terms_t in [terms_s, terms_a, terms_b]:
+    for terms_t in [terms_a, terms_b]:
         # for each term list
         for terms in terms_t:
             word_pos = -1
@@ -313,8 +315,8 @@ def detect_hate_fast(text, meta, lang, mode='strings'):
                     score = SequenceMatcher(None, word_t, term_t).ratio()
                     if lang == 'el':    match = word_t.find(term_t[:max(3, len(term_t)-3)])
                     else:               match = word_t.find(term_t[:max(3, len(term_t)-1)])
-                    if score > 0.75 and match == 0:
-                        print('\tterm \"{}\" and word \"{}\" | score {:.2f} and position {}'.format(term_token, word_token, score, word_pos))
+                    if score > 0.8 and match == 0:
+                        # print('\tterm \"{}\" and word \"{}\" | score {:.2f} and position {}'.format(term_token, word_token, score, word_pos))
                         if not word_pos in matches:
                             matches.append(word_pos)
                             break
@@ -355,8 +357,9 @@ def detect_hate_fast(text, meta, lang, mode='strings'):
 
     return results_txt
 
-# an alternative method for implementing hate speech detection. it is based on
-# spacy's phrase matcher.
+# ******************************************************************************************
+# an alternative method for implementing hate speech detection. it is based on spacy's
+# phrase matcher.
 def detect_hate_matcher(text, meta, lang):
 
     file = open(data_path, 'r', encoding='utf-8')
@@ -424,9 +427,10 @@ def detect_hate_matcher(text, meta, lang):
         # print(datum_t)
         time.sleep(3)
 
-# a simple approach for suggesting frequent words found in texts. this can help for expanding the
-# list of terms found in the dictionaries for filtering data for hate speech. this method can be
-# used in texts that already have been marked as "hate speech".
+# ******************************************************************************************
+# a simple approach for suggesting frequent words found in texts. this can help for expanding
+# the list of terms found in the dictionaries for filtering data for hate speech. this method
+# can be used in texts that already have been marked as "hate speech".
 def detect_terms(text, meta, lang):
 
     print('* term detection')
@@ -463,9 +467,11 @@ def detect_terms(text, meta, lang):
 
     return results_txt
 
-# a method for detecting geolocation from text. geopy with nominatim geocoder are used. entities in
-# the following ranking are preferred: GPE (countries, cities, states), LOC (mountains, bodies of
-# water), FAC (buildings, airports, highways etc.), ORG (companies, agancies, institutions etc.).
+# ******************************************************************************************
+# a method for detecting geolocation from text. geopy with nominatim geocoder are used.
+# entities in the following ranking are preferred: GPE (countries, cities, states), LOC
+# (mountains, bodies of water), FAC (buildings, airports, highways etc.), ORG (companies,
+# agancies, institutions etc.).
 def detect_location(text, meta, lang):
 
     print('* location detection')
@@ -537,8 +543,9 @@ def detect_location(text, meta, lang):
 
     return results_txt
 
-# a pilot method for executing sentiment analysis. it will be used as the base
-# for the upcoming sentiment analysis methods.
+# ******************************************************************************************
+# a pilot method for executing sentiment analysis. it will be used as the base for the
+# upcoming sentiment analysis methods.
 def analyze_sentiment(text, meta, lang):
     nlp = English()  # We only want the tokenizer, so no need to load a model
     matcher = Matcher(nlp.vocab)
@@ -571,11 +578,11 @@ def analyze_sentiment(text, meta, lang):
         span = doc[start:end]
         print(string_id, span.text)
 
-# a method for tfidf (term frequency–inverse document frequency) with nmf
-# (non-negative matrix factorization) or lda (latent dirichlet allocation)
-# is deployed for topic modeling. a list  of topics is created based on a
-# corpus of text items. detected topics and most common terms are printed.
-# 'mode' can be set to 'nmf' or 'lda'. enable 'plot' to get graphs
+# ******************************************************************************************
+# a method for tfidf (term frequency–inverse document frequency) with nmf (non-negative
+# matrix factorization) or lda (latent dirichlet allocation) is deployed for topic modeling.
+# a list  of topics is created based on a corpus of text items. detected topics and most
+# common terms are printed. 'mode' can be set to 'nmf' or 'lda'. enable 'plot' to get graphs
 # for common terms found in texts.
 def topic_modeling(corpus, mode='nmf', plot=True):
 
@@ -652,8 +659,9 @@ def topic_modeling(corpus, mode='nmf', plot=True):
 
     return results, results_txt
 
-# a method for topic modeling along with named entity detection. common
-# entities are returned. 'mode' can be set to 'nmf' or 'lda'.
+# ******************************************************************************************
+# a method for topic modeling along with named entity detection. common entities are
+# returned. 'mode' can be set to 'nmf' or 'lda'.
 def entity_modeling(corpus, mode='nmf'):
 
     # detect language
@@ -724,14 +732,16 @@ def entity_modeling(corpus, mode='nmf'):
 
 
 ''' HELPER METHODS '''
-# a helper method for topic modeling methods to list the detected topics
+# ******************************************************************************************
+# a helper method for topic modeling methods to list the detected topics.
 def print_topics(model, feature_names, no_top_words):
     for topic_idx, topic in enumerate(model.components_):
         print("Topic %d:" % (topic_idx))
         print(" ".join([feature_names[i]
                         for i in topic.argsort()[:-no_top_words - 1:-1]]))
 
-# a helper method for topic modeling methods to plot most common words
+# ******************************************************************************************
+# a helper method for topic modeling methods to plot most common words.
 def plot_common_words(count_data, count_vectorizer,n_top, n_grams_string):
 
     sns.set_style('whitegrid')
@@ -758,8 +768,9 @@ def plot_common_words(count_data, count_vectorizer,n_top, n_grams_string):
 
 
 ''' SUPPLEMENTARY METHODS '''
-# a method primarily for testing various workflows and techniques. it is
-# mostly based on the spacy library for executiong common nlp tasks.
+# ******************************************************************************************
+# a method primarily for testing various workflows and techniques. it is mostly based on the
+# spacy library for executiong common nlp tasks.
 def analyze_syntax(text):
 
     print('Syntax analysis')

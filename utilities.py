@@ -42,6 +42,8 @@ def clean_accent(text):
     t = t.replace('ώ', 'ω')
     t = t.replace('ς', 'σ')
 
+    # en
+
     # es
     t = t.replace('Á', 'A')
     t = t.replace('É', 'E')
@@ -57,6 +59,11 @@ def clean_accent(text):
     t = t.replace('ó', 'o')
     t = t.replace('ú', 'u')
     t = t.replace('ü', 'u')
+
+    # it
+    # ÀÈÉÌÒÓÙ
+    # àèéìòóù
+
 
     return t
 

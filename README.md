@@ -1,11 +1,10 @@
 # Project Description
 PHARM is a European project funded by the European Union, within Rights, Equality and Citizenship programme REC-RRAC-RACI-AG-2019 (GA n. 875217). The main goal of Preventing Hate Against Refugees and Migrants (PHARM) is to monitor and model hate speech against refugees and migrants in Greece, Italy and Spain in order to predict and combat hate crime and also counter its effects using cutting-edge techniques, such as data journalism and narrative persuasion. The main result will be the identification and reduction of online hate speech, and the prediction of potential hate crimes. This GitHub repository includes a full set of scripts of the algorithms that (will) have been developed, according to the requirements of the project. This way, they can be shared with the rest of the team, but also with external stakeholders for serving evaluation purposes by testing if all scripts can be run with the corresponding expected result. Of course, all these methods will further elaborated and improved as the project evolves, while new functionality will be added, according to the project's timeline (i.e. sentiment analysis etc.).
 
-## Sources Selection
 
+## Sources Selection
 Several sources have been selected for the collection of content related to hate speech. The sources include articles and comments from a list of specific Spanish, Italian and Greek websites, as well as twitter, youtube and facebook comments. The websites list includes 22 Spanish, 12 Italian and 16 Greek websites that are prone to publishing hate speech content in the articles or in the comments section. The list of websites and Facebook pages was initialized and updated by the media experts of the three participating universities. Site-specific scraping scripts have been developed for the collection of semi-structured content (including accompanying metadata) from the proposed websites. Websites that are not included in the list can be supported using the site-agnostic scraping script. Tweets are gathered using a list of hashtags and filters containing terms relevant to anti-immigration rhetoric. Youtube comments are collected using search queries relevant to immigration.
 A spreadsheet in Google Docs (https://bit.ly/3jaWzEq) for adding sources of interest has been deployed. Each sheet refers to the country of interest (i.e. Greek, Italian, Spanish). The selected sources (websites, keywords, search terms, facebook pages etc.) for each platform are included in the current version of the spreadsheet.
-
 
 
 ## Scraping & Data Collection
@@ -43,6 +42,7 @@ selenium | Can manipulate dynamic content | More difficult to tune data parsers 
 tweepy | Easy to use | Compatibility issues between versions | https://pypi.org/project/tweepi/ <br> https://anaconda.org/conda-forge/tweepy
 Google API Client | Officially supported by Google | - | https://pypi.org/project/google-api-python-client/ <br> https://anaconda.org/conda-forge/google-api-python-client 
 
+
 ## Datetime Estimation
 A method for detecting and standardizing datetime information from metadata and text has been implemented. Besides location and language, when metadata is available, PHARM might use some relevant extra information for hate speech analysis. Some of this extra information, such as date or time, might be available in most cases in several different formats. This introduces the necessity of standardization. 
 
@@ -59,6 +59,7 @@ dateparser | Relatively high accuracy | Limited estimations | https://pypi.org/p
 datefinder | Lower accuracy | Returns a list of estimations | https://pypi.org/project/datefinder/ <br> https://anaconda.org/conda-forge/datefinder
 parsedatetime | Baseline method | Datetime scheme should be defined | https://pypi.org/project/parsedatetime/ <br> https://anaconda.org/conda-forge/parsedatetime
 
+
 ## Geolocation Estimation
 
 ### Approach
@@ -73,6 +74,7 @@ Package | Pros | Cons | Links
 Geopy | Easy to use with a plenty of geocoders | None (so far) | https://pypi.org/project/geopy/ <br> https://anaconda.org/conda-forge/geopy  
 
 Geopy is a Python client for several popular geocoding web services, enabling the detection of the coordinates of addresses, cities, countries, and landmarks across the globe using third-party geocoders and other data sources. Geopy includes geocoder classes for the OpenStreetMap Nominatim, ESRI ArcGIS, Google Geocoding API, Baidu Maps, Bing Maps API, Yahoo! PlaceFinder, Yandex, IGN France, etc.
+
 
 ## Language Detection
 PHARM will mainly process text produced in Greek, Italian, and Spanish, but many of the sources might have contents in other foreign languages or local dialects. To work with these three national languages, a procedure to detect the language of the media text when it is not properly declared should be present. There already exist many algorithms designed to automatically detect the language in different kinds of texts within a range of probability. 
@@ -113,6 +115,8 @@ In the cases of web scraping, metadata depends on the available metadata provide
 | comment_id | reply_count | like_count | video_id | video_title | channel | video_description | author_id | author_name | date |
 |**Twitter** |             |            |          |             |         |                   |           |             |      |
 | tweet_id   | is_retweet  | is_quote   | user_id  | username    |scr_name | location          | followers | friends     | date |
+
+
 ## Hate Speech Detection
 A couple of methods for finding key terms for hate speech detection have been implemented. These include simple string matching, approximate string matching with the use of the appropriate metrics, such as Levenshtein Distance, Damerau-Levenshtein Distance, Jaro Distance, Jaro-Winkler Distance, Match Rating Approach Comparison, Hamming Distance. Term matching also aims at being suffix agnostic, accommodating the various suffixes that may exist in nouns for many languages (i.e. Greek language features different suffixes for gender or singular/plural versions). A word-vector approach has also been developed, taking into account the semantic meaning of the terms. A hybrid dictionary-based approach with predefined phrases, along with dynamic term combinations (i.e. adjectives combined with nouns) has been implemented and is under evaluation.
 
@@ -126,6 +130,7 @@ The aforementioned approach is implemented as a method (detect_hate(text, metada
 Package | Pros | Cons | Links
 --------|------|------|-----
 spacy | Pretrained models (EN, ES, IT, EL), lots of linguistic features (part of speech tagging, entity recognition, tokenization, lemmatization, rule based matching, word vectors, etc.) | Models with vectors are slow | https://pypi.org/project/spacy/ <br> https://anaconda.org/conda-forge/spacy
+
 
 ## Topic Modeling
 
@@ -141,7 +146,7 @@ Identifying what an unstructured text is about is a challenging task. Most of th
 ### Approach
 A similar to topic modeling approach has been implemented, including named entity detection for the identified topics.
 
-# How to run the project
+# How to Execute the Code
 Review the first lines of code (marked as "PYTHON SETUP") in the various Python files of the project to install the necessary libraries for executing the project. Use the "main.py" file as the starting script to run the code. The supported workflows/analyses can be controlled via the "Config/main.txt" configuration file. Instructions for controlling the workflow are following and are also included in the main configuration file. This set of scripts can execute various text collection and processing tasks, as specified by the requirements of the PHARM project. These tasks can be grouped into two main categories: data collection and data analysis.
 
 ### [TWITTER-STREAM]

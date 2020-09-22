@@ -4,11 +4,10 @@
 # conda install -c conda-forge tweepy
 
 ''' Libraries '''
-import time, argparse, string, json, sys
+import time, argparse, string, json, sys, random
 from datetime import datetime
 import tweepy
-from tweepy import Stream
-from tweepy import OAuthHandler
+from tweepy import Stream, OAuthHandler
 from tweepy.streaming import StreamListener
 
 
@@ -27,38 +26,16 @@ def get_parser():
                         default='Data')
     return parser
 
-def format_filename(fname):
-    """Convert file name into a safe string.
-    Arguments:
-        fname -- the file name to convert
-    Return:
-        String -- converted file name
-    """
-    return ''.join(convert_valid(one_char) for one_char in fname)
-
-def convert_valid(one_char):
-    """Convert a character into '_' if invalid.
-    Arguments:
-        one_char -- the char to convert
-    Return:
-        Character -- converted char
-    """
-    valid_chars = "-_.%s%s" % (string.ascii_letters, string.digits)
-    if one_char in valid_chars:
-        return one_char
-    else:
-        return '_'
-
 class MyListener(StreamListener):
 
     def __init__(self, data_dir, query):
         super(MyListener, self).__init__()
-        query_fname = format_filename(query)
-        self.outfile = "%s/scraper_%s_data.json" % (data_dir, query_fname)
+        # query_fname = format_filename(query)
+        self.outfile = "%s/scraper_%s_data.json" % (data_dir, query)
 
     def on_status(self, status):
         print (status.text)
-        print (type(status))
+        # print (type(status))
 
         is_retweet = hasattr(status, "retweeted_status")
 
@@ -166,28 +143,21 @@ def stream(lang):
     print('Start gathering... to folder \'', args.data_dir, '\' with argument \'', args.query, '\'')
     twitter_stream = Stream(auth, MyListener(args.data_dir, args.query))
 
-    dictionary = []
-    # with open('Dictionaries\dictionary_'+lang+'.txt', encoding="utf-8") as f:
-    #     for line in f.readlines():
-    #         line = line.replace("\n", "").replace("\r", "")
-    #         dictionary.append(line)
-
-    # load the filter terms from the dictionaries - safe words and phrases first
-    with open('Dictionaries\\dictionary_' + lang + '_s.txt', 'r', encoding='utf-8') as file:    dictionary = file.read().splitlines()
-    # load secondary words
-    with open('Dictionaries\\dictionary_' + lang + '_a.txt', 'r', encoding='utf-8') as file:    terms_a = file.read().splitlines()
-    # load primary words
-    with open('Dictionaries\\dictionary_' + lang + '_b.txt', 'r', encoding='utf-8') as file:    terms_b = file.read().splitlines()
-    # synthesize phrases
+    # load the keywords and for the query phrases
+    with open('Keywords\\keywords_' + lang + '_s.txt', 'r', encoding='utf-8') as file:    dictionary = file.read().splitlines()
+    with open('Keywords\\keywords_' + lang + '_a.txt', 'r', encoding='utf-8') as file:    terms_a = file.read().splitlines()
+    with open('Keywords\\keywords_' + lang + '_b.txt', 'r', encoding='utf-8') as file:    terms_b = file.read().splitlines()
     for term_a in terms_a:
-        for term_b in terms_b:
-            # find all suffixes and make all possible combinations
+         for term_b in terms_b:
+            # ignore suffixes
             if term_a.find("/") > 0:    term_a = term_a[:term_a.find("/")]
             if term_b.find("/") > 0:    term_b = term_b[:term_b.find("/")]
             # if the suffix ends with a "-" join the words instead of making a phrase
-            #if term_a[-1] == '-':       dictionary.append(term_a[:-1] + term_b)
-            #else:                       dictionary.append(term_a + ' ' + term_b)
+            if term_a[-1] == '-':       dictionary.append(term_a[:-1] + term_b)
+            else:                       dictionary.append(term_a + ' ' + term_b)
+    dictionary = random.choices(dictionary, k=200)
 
+    print(dictionary)
     twitter_stream.filter(track=dictionary)
 
 def timeline(username):

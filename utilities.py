@@ -4,7 +4,11 @@
 ''' LIBRARIES IMPORTED '''
 import numpy
 from bs4 import BeautifulSoup
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
+global options
+options = FirefoxOptions()
+# options.set_headless()
 
 def clean_soup(soup):
     t = soup.get_text(separator=' ')
@@ -42,8 +46,6 @@ def clean_accent(text):
     t = t.replace('ώ', 'ω')
     t = t.replace('ς', 'σ')
 
-    # en
-
     # es
     t = t.replace('Á', 'A')
     t = t.replace('É', 'E')
@@ -61,9 +63,20 @@ def clean_accent(text):
     t = t.replace('ü', 'u')
 
     # it
-    # ÀÈÉÌÒÓÙ
-    # àèéìòóù
-
+    t = t.replace('À', 'A')
+    t = t.replace('È', 'E')
+    t = t.replace('É', 'E')
+    t = t.replace('Ì', 'I')
+    t = t.replace('Ò', 'O')
+    t = t.replace('Ó', 'O')
+    t = t.replace('Ù', 'U')
+    t = t.replace('à', 'a')
+    t = t.replace('è', 'e')
+    t = t.replace('é', 'e')
+    t = t.replace('ì', 'i')
+    t = t.replace('ò', 'o')
+    t = t.replace('ó', 'o')
+    t = t.replace('ù', 'u')
 
     return t
 

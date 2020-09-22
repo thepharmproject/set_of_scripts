@@ -15,13 +15,6 @@ import random
 import hashlib, requests
 from urllib.parse import urlsplit, urlunsplit
 from bs4 import BeautifulSoup
-#from selenium import webdriver
-#from selenium.webdriver.common.by import By
-#from selenium.webdriver.chrome.options import Options as ChromeOptions
-#from selenium.webdriver.firefox.options import Options as FirefoxOptions
-#from selenium.webdriver.support import expected_conditions as EC
-#from selenium.webdriver.common.keys import Keys
-#from selenium.webdriver.support.ui import WebDriverWait
 from Scrapers import *
 import utilities as utils
 
@@ -58,14 +51,14 @@ def download(base_url, curr_url, cycles):
     results = []
     soup = BeautifulSoup(content, "html.parser")
 
-    # 01 EN - okdiario.com - WordPress
+    # 01 EN - sioeeu.wordpress.com - WordPress
     if curr_url.find('sioeeu.wordpress.com') > 0:           en_sioeeu_wordpress_com.scrape(curr_url, hash, soup, results)
     
     # 01 ES - okdiario.com - WordPress
     if curr_url.find('okdiario.com') > 0:                   es_okdiario_com.scrape(curr_url, hash, soup, results)
-    # 02 ES - alertadigital.com
+    # 02 ES - alertadigital.com -  WordPress
     if curr_url.find('alertadigital.com') > 0:              es_alertadigital_com.scrape(curr_url, hash, soup, results)
-    # 03 ES - periodistadigital.com
+    # 03 ES - periodistadigital.com -  WordPress
     if curr_url.find('periodistadigital.com') > 0:          es_periodistadigital_com.scrape(curr_url, hash, soup, results)
     # 04 ES - elespanol.com - Custom / Custom
     if curr_url.find('elespanol.com') > 0:                  es_elespanol_com.scrape(curr_url, hash, soup, results)
@@ -103,10 +96,10 @@ def download(base_url, curr_url, cycles):
     if curr_url.find('espana2000.es') > 0:                  es_espana2000_es.scrape(curr_url, hash, soup, results)
     # 21 ES - tradicionviva.es - Wordpress / Facebook
     if curr_url.find('tradicionviva.es') > 0:               es_tradicionviva_es.scrape(curr_url, hash, soup, results)
-    # 22 ES - manos-limpias.es - Custom ASP
+    # 22 ES - manos-limpias.es - Custom
     if curr_url.find('manos-limpias.es') > 0:               es_manos_limpias_es.scrape(curr_url, hash, soup, results)
     # 23 ES - laverdad.es - Custom / Custom
-    if curr_url.find('laverdad.es') > 0:                    es_laverdad_es.scrape(curr_url, soup, results)
+    if curr_url.find('laverdad.es') > 0:                    es_laverdad_es.scrape(curr_url, hash, soup, results)
 
     # 01 IT - termometropolitico.it - WordPress
     if curr_url.find('termometropolitico.it') > 0:          it_termometropolitico_it.scrape(curr_url, hash, soup, results)
@@ -122,12 +115,12 @@ def download(base_url, curr_url, cycles):
     if curr_url.find('ilpopulista.it') > 0:                 it_ilpopulista_it.scrape(curr_url, hash, soup, results)
     # 07 IT - imolaoggi.it - WordPress
     if curr_url.find('imolaoggi.it') > 0:                   it_imolaoggi_it.scrape(curr_url, hash, soup, results)
-    # 08 IT - destra.it - Custom
+    # 08 IT - destra.it - WordPress / WordPress
     if curr_url.find('destra.it') > 0:                      it_destra_it.scrape(curr_url, hash, soup, results)
     # 09 IT - identità.com - Custom
     if curr_url.find('xn--identit-fwa.com') > 0:            it_identità_it.scrape(curr_url, hash, soup, results)
     # 10 IT - cartadiroma.org - WordPress
-    if curr_url.find('cartadiroma.org') > 0:                it_cartadiroma_org.scrape(curr_url, soup, results)
+    if curr_url.find('cartadiroma.org') > 0:                it_cartadiroma_org.scrape(curr_url, hash, soup, results)
     # 11 IT - rainews.it - Custom
     if curr_url.find('rainews.it') > 0:                     it_rainews_it.scrape(curr_url, hash, soup, results)
     # 12 IT - ilprimatonazionale.it - WordPress
@@ -143,7 +136,7 @@ def download(base_url, curr_url, cycles):
     if curr_url.find('infognomonpolitics.gr') > 0:          el_infognomonpolitics_gr.scrape(curr_url, hash, soup, results)
     # 05 EL - defencereview.gr - WordPress
     if curr_url.find('defencereview.gr') > 0:               el_defencereview_gr.scrape(curr_url, hash, soup, results)
-    # 06 EL - voicenews.gr - WordPress
+    # 06 EL - olympia.gr - WordPress / DISQUS
     if curr_url.find('olympia.gr') > 0:                     el_olympia_gr.scrape(curr_url, hash, soup, results)
     # 07 EL - voicenews.gr - WordPress
     if curr_url.find('voicenews.gr') > 0:                   el_voicenews_gr.scrape(curr_url, hash, soup, results)

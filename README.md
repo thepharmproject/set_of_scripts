@@ -107,8 +107,7 @@ Text |	payload
 
 The main/base data field is the text (content), accompanied by the id, annotations and meta fields. Meta field is a container, including all additional data. A fundamental/minimum set of metadata will be used for all platforms. These will be the Pharm ID (PID), the source URL, the title, author, date, tags and categories. These fields are more probable to be found for all records across different sources. The following figure gives a hierarchical view of the proposed data scheme.
 
-A custom identifier has been designed, serving as a compact and unique representation of each record retrieved. This numerical value is composed as a synthesis of 2 digits for identifying language, 2 digits for identifying source, 8 digits derived as a hash from the corresponding URL, and 4 digits for enumerating items with the same language.
-In the cases of web scraping, metadata depends on the available metadata provided by each site and the site-specific structure. In the case of youtube and twitter comments, where the corresponding APIs are used, specific metadata have been selected and are collected along with the comment text.
+A custom identifier has been designed, serving as a compact and unique representation of each record retrieved, based on a hash function of the source URL. In the cases of web scraping, metadata depends on the available metadata provided by each site and the site-specific structure. In the case of youtube and twitter comments, where the corresponding APIs are used, specific metadata have been selected and are collected along with the comment text.
 
 |Youtube     |             |            |          |             |         |                   |           |             |      |
 |:----------:|-------------|------------|----------|-------------|---------|-------------------|-----------|-------------|------|

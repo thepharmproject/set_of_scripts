@@ -120,7 +120,7 @@ def analyze_data(path, type='all', lang_ana=True, date_ana=True, hate_ana=True, 
                 date = an.detect_datetime(text, meta, lang)
                 datum_json["meta"]["date"] = date
             if hate_ana:
-                hate = an.detect_hate(text, meta, lang)
+                hate = an.detect_hate_fast(text, meta, lang)
                 datum_json["meta"]["hate"] = hate
             if term_ana:
                 terms = an.detect_terms(text, meta, lang)
@@ -140,11 +140,13 @@ def analyze_data(path, type='all', lang_ana=True, date_ana=True, hate_ana=True, 
             for datum_upd in data_upd:  file.write(datum_upd + '\n')
 
         # perform topic and entity modeling
-        print(' ')
-        print('analyzing corpus...')
-        if topic_ana:   _, topics = an.topic_modeling(corpus)
-        if ent_ana:     _, entities = an.entity_modeling(corpus)
-
+        if len(corpus) > 10:
+            print('\nanalyzing corpus for topics...')
+            if topic_ana:   _, topics = an.topic_modeling(corpus)
+            if ent_ana:     _, entities = an.entity_modeling(corpus)
+        else:
+            #
+            print('\ncorpus too small to execute topic modeling...')
 
 ''' SUPPLEMENTARY METHODS FOR DEVELOPMENT & TESTING '''
 # ******************************************************************************************

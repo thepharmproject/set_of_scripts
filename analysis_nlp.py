@@ -126,7 +126,7 @@ def detect_datetime(text, meta, lang):
             dates = datefinder.find_dates(text)
             for date_item in dates:
                 date = date_item
-                print('\tdatefinder meta:', date)
+                print('\tdatefinder text:', date)
                 results.append(str(date))
                 break
         except: print('\tdatefinder text failed')
@@ -270,7 +270,7 @@ def detect_hate(text, meta, lang, mode='strings'):
 # a faster implementation of the aforementioned hate speech detection.
 def detect_hate_fast(text, meta, lang, mode='strings'):
 
-    print('* hate speech detection with mode \'{}\''.format(mode))
+    print('* hate speech detection')
 
     # initialize the results list
     results = []
@@ -584,7 +584,7 @@ def analyze_sentiment(text, meta, lang):
 # a list  of topics is created based on a corpus of text items. detected topics and most
 # common terms are printed. 'mode' can be set to 'nmf' or 'lda'. enable 'plot' to get graphs
 # for common terms found in texts.
-def topic_modeling(corpus, mode='nmf', plot=True):
+def topic_modeling(corpus, mode='nmf', plot=False):
 
     # detect language
     language = detect_language(corpus[0])

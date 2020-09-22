@@ -1,0 +1,70 @@
+******************************************************************************************
+Set this parameter to collect tweets via Twitter's stream function. Set the parameter to
+"en", "el", "es" or "it" to use the Greek, English, Spanish, or Italian keyword list. You
+can find and modify the keyword lists in the "Keywords" directory. Results are stored to
+"Data/scraper_twitter_data.json". Comment out the following line to skip this type of data
+collection.
+
+[TWITTER-STREAM]="it"
+
+
+******************************************************************************************
+Use these parameters for collecting YouTube comments via the Google API. Set the [YOUTUBE-
+SEARCH] parameter to define the keywords for searching content, e.g. "migration refugees"
+and the [YOUTUBE-SEARCH-NRESULTS] parameter to regulate the number of returned results.
+Results are stored to "Data/scraper_youtube_data.json". Comment out the following lines
+for ignoring this method.
+
+#[YOUTUBE-SEARCH]="πρόσφυγες"
+#[YOUTUBE-SEARCH-NRESULTS]="200"
+
+
+******************************************************************************************
+Use this parameter for collecting texts from a single webpage. Simply set the URL of the
+webpage. The URL can point to an open Facebook Group or Page, a YouTube video or any other
+website. Results are stored to "Data/single_facebook_data.json", "Data/single_youtube_data
+.json" and  "Data/single_web_data.json" respectively. Data management is semi-structured
+for the Facebook and YouTube platforms, whereas is unstructured for the rest of the
+webpages. Comment out the following lines to skip this type of data collection.
+
+#[WEBSITE-SINGLE]="https://www.facebook.com/groups/8080169598"
+#[WEBSITE-SINGLE]="https://www.facebook.com/kroussosgr"
+#[WEBSITE-SINGLE]="https://www.youtube.com/watch?v=7lsj4mBU4_s"
+#[WEBSITE-SINGLE]="https://bit.ly/33b7jLZ"
+
+
+******************************************************************************************
+Set these two parameters for collecting articles and comments from the supported websites
+for structured scraping. The list of the supported websites is stored in the "Config/
+websites.txt" file. Make use of the [WEBSITE-MASS] and [WEBSITE-MASS-CYCLES] to set the
+URL and define the number of scans cycles the spider will perform to the site. The
+algorithm automatically discovers the various pages/articles within the site, keeps a
+list of the already visited hyperlinks, stores content and moves on to new unvisited
+destinations. Results are stored to separate, according the name of the site, files in
+the "Data/scraper_web/" directory. Comment out the following lines for skipping this
+type of data collection. (e.g. http://www.outono.net, http://www.actuall.com,
+http://www.liberoquotidiano.it)
+
+[WEBSITE-MASS]="http://manos-limpias.es"
+[WEBSITE-MASS-CYCLES]="10"
+
+
+******************************************************************************************
+Set this parameter for executing the data analyses methods, acoording to the project's
+requirements, such as topic modeling, language detection, geolocation estimation, datetime
+parsing, hate speech detection etc. These methods will be refined and updated with new
+functions, according to the project's timeline. The analyses can be applied to the data
+that is collected and stored in the "Data" directory. Use the following parameter to point
+to a specific file/s. Once code execution is finished, a new file with the same name as
+the original plus the "_processed" suffix will be generated. Derived data can be used for
+manual annotation, or, generally, for developing a "hate speech" corpus. Comment out the
+following line for skipping the data analysis procedure. (e.g. actuall, elespanol)
+
+[ANALYZE-DATA]="Data\\scraper_web\\*limpias*_data.json" diariosur
+
+
+******************************************************************************************
+Set this parameter for testing new functions, such as hate speech detection filtering
+performance.
+
+#[TEST-FUNCTIONS]="True"

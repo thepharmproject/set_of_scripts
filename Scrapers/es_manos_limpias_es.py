@@ -6,18 +6,31 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 import utilities as utils
+import time, json
 
-def scrape(curr_url, soup, results):
+def scrape(curr_url, hash, soup, results):
     print('Found manos-limpias.es...')
     for t in soup.find_all('div', class_='col-md-9'):
         print('Getting asp article...')
-        result = '{'
-        result = result + '\"type\":\"article\",'
-        result = result + '\"source\":\"' + curr_url + '\",'
-        c = t.find_all('h3', class_='')[0]
-        result = result + '\"title\":\"' + utils.clean_soup(c) + '\",'
+
+        dt = {}
+        dm = {}
+
+        dm["id"] = str(hash)
+        dm["type"] = 'article'
+        dm["source"] = curr_url
+        dm["meta"] = ''
+
+        dm["title"] = ''
+        for c in t.find_all('h3', class_=''):
+            dm["title"] = dm["title"] + utils.clean_soup(c)
+            break
+
+        dt["meta"] = dm
+        dt["text"] = ''
         for c in t.find_all('div', class_='content-box'):
-            result = result + '\"body\":\"' + utils.clean_soup(c) + '\"'
-        result = result + '}'
+            dt["text"] = dt["text"] + utils.clean_soup(c) + ' '
+
+        result = json.dumps(dt, ensure_ascii=False)
         results.append(result)
         print(result)

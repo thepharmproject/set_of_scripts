@@ -1,12 +1,21 @@
+from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
 import utilities as utils
+import time, json
 
 def scrape(curr_url, hash, soup, results):
     print('Found periodistadigital.com...')
-    counter = 0
+
     for t in soup.find_all('div', id='m4p-post-detail'):
-        counter += 1
+        print('Getting wordpress article...')
+
         result = '{\"meta\":{'
-        result = result + '\"id\":\"' + str(hash) + str(counter) + '\",'
+        result = result + '\"id\":\"' + str(hash) + '\",'
         result = result + '\"type\":\"article\",'
         result = result + '\"source\":\"' + curr_url + '\",'
         for c in t.find_all('div', class_='m4p-author_time'):
@@ -21,5 +30,6 @@ def scrape(curr_url, hash, soup, results):
             result = result + '\"text\":\"' + utils.clean_soup(c) + '\"'
         result = result + '}'
 
-        print(result)
+        result = utils.clean_whitespaces(result)
         results.append(result)
+        print(result)

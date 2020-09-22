@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 import utilities as utils
-import json
+import time, json
 
 def scrape(curr_url, hash, soup, results):
     print('Found gazzetta.it...')
@@ -24,8 +24,8 @@ def scrape(curr_url, hash, soup, results):
             dm["source"] = curr_url
             dm["meta"] = ''
             for c in t.find_all('div', class_='content'):
-                for d in c.find_all(class_='is-author'):
-                    dm["meta"] = dm["meta"] + utils.clean_soup(c) + ' '
+                # for d in c.find_all(class_='is-author'):
+                    # dm["meta"] = dm["meta"] + utils.clean_soup(c) + ' '
                 for d in c.find_all(class_='article-date'):
                     dm["meta"] = dm["meta"] + utils.clean_soup(c) + ' '
             dm["title"] = ''

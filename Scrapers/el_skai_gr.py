@@ -49,7 +49,7 @@ def scrape(curr_url, hash, soup, results):
         print('Getting disqus comments...')
 
         # reload main website
-        with webdriver.Firefox(log_path='Xtra/geckodriver.log', options=FirefoxOptions()) as driver:
+        with webdriver.Firefox() as driver:
 
             ds_url = ''
 

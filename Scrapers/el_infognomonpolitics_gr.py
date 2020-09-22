@@ -52,10 +52,11 @@ def scrape(curr_url, hash, soup, results):
     if len(soup.find_all('article', class_='post')) > 0:
 
         options = FirefoxOptions()
-        options.add_argument("--headless")
+        options.set_headless()
         driver = webdriver.Firefox(options=options)
         driver.implicitly_wait(5)
 
+        # discover the url
         ds_url = ''
         try:
             driver.get(curr_url)
@@ -70,6 +71,7 @@ def scrape(curr_url, hash, soup, results):
             #
             print('site webdriver timeout...')
 
+        # get the content
         try:
             driver.get(ds_url)
             WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CLASS_NAME, 'post-message')))
@@ -77,6 +79,7 @@ def scrape(curr_url, hash, soup, results):
             #
             print('disqus webdriver timeout...')
 
+        # parse the data
         try:
             print('Getting disqus comments...')
             soup = BeautifulSoup(driver.page_source, "html.parser")

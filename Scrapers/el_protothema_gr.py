@@ -30,7 +30,6 @@ def scrape(curr_url, hash, soup, results):
                     dm["meta"] = dm["meta"] + utils.clean_soup(d) + ' '
             for c in t.select('div.articleInfo'):
                 dm["meta"] = dm["meta"] + utils.clean_soup(c) + ''
-
             dm["title"] = ''
             for c in t.select('div.title > h1'):
                 dm["title"] = dm["title"] + utils.clean_soup(c) + ' '

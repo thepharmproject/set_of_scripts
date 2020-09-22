@@ -6,21 +6,17 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 import utilities as utils
-import json
+import time, json
 
 def scrape(curr_url, hash, soup, results):
     print('Found okdiario.com...')
-
-    counter = 0
 
     for t in soup.find_all('article', class_='post'):
         if len(t.find_all('div', class_='entry-content')) > 0:
             print('Getting wordpress article...')
 
-            counter += 1
-
             result = '{\"meta\":{'
-            result = result + '\"id\":\"' + str(hash) + str(counter) + '\",'
+            result = result + '\"id\":\"' + str(hash) + '\",'
             result = result + '\"type\":\"article\",'
             result = result + '\"source\":\"' + curr_url + '\",'
             result = result + '\"meta\":\"'

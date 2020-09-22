@@ -6,47 +6,68 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 import utilities as utils
+import time, json
 
-def scrape(curr_url, soup, results):
+def scrape(curr_url, hash, soup, results):
     print('Found laverdad.es...')
+
+    # article
     for t in soup.find_all('div', class_='wrapper voc-story'):
         print('Getting custom article...')
-        result = '{'
-        result = result + '\"type\":\"article\",'
-        result = result + '\"source\":\"' + curr_url + '\",'
+
+        dt = {}
+        dm = {}
+
+        dm["id"] = str(hash)
+        dm["type"] = 'article'
+        dm["source"] = curr_url
+        dm["meta"] = ''
         for c in t.find_all('div', class_='voc-author-info'):
-            result = result + '\"meta\":\"' + utils.clean_soup(c) + '\",'
+            dm["meta"] = dm["meta"] + utils.clean_soup(c) + ' '
+        dm["title"] = ''
         for c in t.find_all('h1', class_=''):
-            result = result + '\"title\":\"' + utils.clean_soup(c) + '\",'
-        result = result + '\"body\":\"'
+            dm["title"] = dm["title"] + utils.clean_soup(c) + ' '
+
+        dt["meta"] = dm
+        dt["text"] = ''
         for c in t.find_all('p', class_=''):
-            result = result + utils.clean_soup(c)
-        result = result + '\"'
-        result = result + '}'
+            dt["text"] = dt["text"] + utils.clean_soup(c) + ' '
+
+        result = json.dumps(dt, ensure_ascii=False)
         results.append(result)
         print(result)
+
+    # comments
     if len(soup.find_all('div', class_='voc-comments-title')) > 0:
         print('Getting custom comments...')
-        options = FirefoxOptions()
-        options.add_argument("--headless")
-        driver = webdriver.Firefox(options=options)
-        driver.implicitly_wait(5)
-        try:
-            driver.get(curr_url)
-            driver.execute_script("document.getElementById('comments').scrollIntoView();setTimeout(function(){},3000);")
-            driver.execute_script("document.getElementsByClassName('voc-comments-title')[0].click();setTimeout(function(){},3000);")
-            WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CLASS_NAME, 'voc-comment')))
-            content = driver.page_source
-        except:
-            print('webdriver timeout... ')
+
+        with webdriver.Firefox() as driver:
+
             content = ''
-        driver.close()
-        soup_s = BeautifulSoup(content, "html.parser")
-        for t in soup_s.find_all('div', class_='gig-comment-body'):
-            result = '{'
-            result = result + '\"type\":\"comment\",'
-            result = result + '\"source\":\"' + curr_url + '\",'
-            result = result + '\"body\":\"' + utils.clean_soup(t) + '\"'
-            result = result + '}'
+            try:
+                driver.implicitly_wait(5)
+                driver.get(curr_url)
+                driver.execute_script("document.getElementById('comments').scrollIntoView();setTimeout(function(){},3000);")
+                driver.execute_script("document.getElementsByClassName('voc-comments-title')[0].click();setTimeout(function(){},3000);")
+                WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CLASS_NAME, 'voc-comment')))
+                content = driver.page_source
+            except:
+                print('webdriver timeout...')
+                content = ''
+            driver.close()
+
+        for t in BeautifulSoup(content, "html.parser").find_all('div', class_='gig-comment-body'):
+
+            dt = {}
+            dm = {}
+
+            dm["id"] = str(hash)
+            dm["type"] = 'comment'
+            dm["source"] = curr_url
+
+            dt["meta"] = dm
+            dt["text"] = utils.clean_soup(t)
+
+            result = json.dumps(dt, ensure_ascii=False)
             results.append(result)
             print(result)

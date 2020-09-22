@@ -6,40 +6,58 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 import utilities as utils
+import time, json
 
 def scrape(curr_url, hash, soup, results):
     print('Found olympia.gr...')
 
+    # reload with selenium
+    with webdriver.Firefox() as driver:
+
+        try:
+            driver.implicitly_wait(5)
+            driver.maximize_window()
+            driver.get(curr_url)
+            driver.find_element_by_tag_name('body').send_keys(Keys.END)
+            WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'disqus_thread')))
+            content = driver.page_source
+            # for i in cont.find_all('iframe'):
+            #     if i.has_attr('src') and i['src'].find('disqus.com/embed') >= 0:
+            #         ds_url = i['src']
+            #         print('found discus thread with url:', ds_url)
+            #         break
+        except:
+            content = ''
+            print('webdriver timeout... ')
+
+        driver.close()
+
     # article
-    for t in soup.find_all('article', class_='post'):
+    for t in BeautifulSoup(content, "html.parser").find_all('article', class_='post'):
         if len(soup.find_all('body', class_='single-post')) > 0:
             print('Getting wordpress article...')
 
-            result = '{\"meta\":{'
-            result = result + '\"id\":\"' + str(hash) + '\",'
-            result = result + '\"type\":\"article\",'
-            result = result + '\"source\":\"' + curr_url + '\",'
-            result = result + '\"meta\":\"'
-            for c in t.find_all('div', class_='entry-meta'):
-                for d in c.select('span.posted-on'):
-                    result = result + utils.clean_soup(d) + ' '
-                for d in c.select('span.cat-links'):
-                    result = result + utils.clean_soup(d) + ' '
-            result = result + '\",'
-            result = result + '\"title\":\"'
-            for c in t.select('div.entry-header-column > a'):
-                #
-                result = result + utils.clean_soup(c)
-            result = result + '\"'
-            result = result + '},'
+            dt = {}
+            dm = {}
 
-            result = result + '\"text\":\"'
-            for c in t.find_all('div', class_='entry-content'):
-                for d in c.find_all(class_=None, recursive=False):
-                    result = result + utils.clean_soup(d) + ' '
-            result = result + '\"'
-            result = result + '}'
+            dm["id"] = str(hash)
+            dm["type"] = 'article'
+            dm["source"] = curr_url
+            dm["meta"] = ''
+            for c in t.select('div.tdb-block-inner > time.entry-date'):
+                dm["meta"] = dm["meta"] + utils.clean_soup(c) + ' '
+            for c in t.select('ul.tdb-tags > li > a'):
+                dm["meta"] = dm["meta"] + utils.clean_soup(c) + ' '
+            dm["title"] = ''
+            for c in t.select('h1.tdb-title-text'):
+                dm["title"] = dm["title"] + utils.clean_soup(c) + ' '
 
-            result = utils.clean_whitespaces(result)
+            dt["meta"] = dm
+            dt["text"] = ''
+            for c in t.select('div.wpb_wrapper > div.tdb_single_content > div.tdb-block-inner'):
+                for d in c.find_all('p', class_=None):
+                    dt["text"] = dt["text"] + utils.clean_soup(d) + ' '
+
+            result = json.dumps(dt, ensure_ascii=False)
             results.append(result)
             print(result)

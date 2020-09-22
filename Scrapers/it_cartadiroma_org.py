@@ -6,9 +6,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 import utilities as utils
-import json
+import time, json
 
-def scrape(curr_url, soup, results):
+def scrape(curr_url, hash, soup, results):
     print('Found cartadiroma.org...')
 
     # article

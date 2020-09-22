@@ -11,6 +11,7 @@ import time, json
 def scrape(curr_url, hash, soup, results):
     print('Found arxaiaithomi.gr...')
 
+    # article
     for t in soup.find_all('div', class_='post'):
         if len(soup.find_all('body', class_='single-post')) > 0:
             print('Getting wordpress article...')
@@ -33,8 +34,9 @@ def scrape(curr_url, hash, soup, results):
 
             result = result + '\"text\":\"'
             for c in t.find_all('div', class_='post-bodycopy'):
-                #
-                result = result + utils.clean_soup(c)
+                for d in c.find_all(recursive=False):
+                    if d.name != 'div':
+                        result = result + utils.clean_soup(d) + ' '
             result = result + '\"'
             result = result + '}'
 

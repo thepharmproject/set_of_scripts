@@ -132,10 +132,10 @@ def stream(lang):
     # args.query = 'hate'
 
     print('Start tweepy...')
-    consumer_key = 'bk7wn33YtsA2W2HTtP9o6yr26'
-    consumer_secret = 'YougqBSBRFpg9CdBbTBCDCJLD3brZKojMzUDfB6nvsc5PJ0p5B'
-    access_token = '955766670135644160-CqYMwTNxsiDBIikR8lhfaZUb6wxUiU8'
-    access_secret = 'CWAUOPLt81NktT9hZaoIcWAuMmy2XxVmB8WVXyzrlJ8hj'
+    consumer_key = 'xxx'
+    consumer_secret = 'yyy'
+    access_token = 'yyy'
+    access_secret = 'zzz'
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_secret)
     api = tweepy.API(auth)
